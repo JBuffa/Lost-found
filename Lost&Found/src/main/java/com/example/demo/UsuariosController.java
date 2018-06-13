@@ -38,8 +38,8 @@ public class UsuariosController {
 	}
 	
 	@PostMapping("/procesar-registro")
-		public String procesarLogin( HttpSession session, @RequestParam String apodo, @RequestParam String contrasenia) throws SQLException {
-		boolean sePudo = UsuariosHelper.intentarLoguearse(session, apodo, contrasenia);
+		public String procesarLogin( HttpSession session, @RequestParam String nick, @RequestParam String contrasenia) throws SQLException {
+		boolean sePudo = UsuariosHelper.intentarLoguearse(session, nick, contrasenia);
 		
 		if (sePudo){
 			return "redirect:/blank";
@@ -64,9 +64,40 @@ public class UsuariosController {
 	
 	// pagina inicial
 	
-	@GetMapping("/home")
-	public String index(){	
-		return "blank";
+	@GetMapping("/")
+	public String inicio(){	
+		return "home";
+	}
+	
+
+	
+	// pagina adopcion
+	
+	@GetMapping("/adoption")
+	public String adoptar(){	
+		return "tables";
+	}
+	
+	// pagina perdidos
+	
+	@GetMapping("/lost")
+	public String perdidos(){	
+		return "lost";
+	}
+	
+	// anuncios
+	
+	@GetMapping("/announcements")
+	public String anuncios(){	
+		return "announcements";
+	}
+	
+	
+	// contactarnos
+	
+	@GetMapping("/contacto")
+	public String contacto(){	
+		return "contact";
 	}
 	
 

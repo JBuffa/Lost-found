@@ -1,6 +1,6 @@
 package com.example.model;
 
-public class Usuario {
+public class Refugio {
 	private int id;
 	private String nick;
 	private String contrasenia;
@@ -9,7 +9,7 @@ public class Usuario {
 	private String imagen_de_perfil;
 	private boolean administrador;
 	
-	public Usuario(int id, String nick, String contrasenia, boolean administrador, String codigo, String correo, String imagen_de_perfil) {
+	public Refugio(int id, String nick, String contrasenia, boolean administrador, String codigo, String correo, String imagen_de_perfil) {
 		this.id = id;
 		this.nick = nick;
 		this.contrasenia = contrasenia;

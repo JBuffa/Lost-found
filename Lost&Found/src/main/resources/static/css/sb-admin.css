@@ -475,4 +475,35 @@ footer.sticky-footer {
   body.sidenav-toggled footer.sticky-footer {
     width: calc(100% - 55px);
   }
+  
+  //Extras
+  
+.perfil-header {
+  height: 50vh;
+  min-height: 300px;
+  color: black:
+}
+ 
+ .perfil-img{
+  width: 100%;
+}
+
+b, strong {
+  font-weight: bolder
+ }
+ 
+ address {
+    margin-bottom: 1rem;
+    font-style: normal;
+    line-height: inherit;
+ }
+ 
+ .tarjeta-usuario {
+	border: 2px solid black;
+	margin: 5px;
+	padding: 5px;
+}
+ 
+ 
+ 
 }

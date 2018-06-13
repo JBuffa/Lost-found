@@ -24,14 +24,14 @@ public class UsuariosHelper {
 	@Autowired
 	private UsuariosHelper UsuariosHelper;
 	
-	public boolean intentarLoguearse( HttpSession session, String apodo, String contrasenia ) throws SQLException{
+	public boolean intentarLoguearse( HttpSession session, String correo, String contrasenia ) throws SQLException{
 		
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 		
 		PreparedStatement consulta = 
-				connection.prepareStatement("SELECT * FROM usuarios WHERE apodo = ? AND contrasenia = ?;");
-		consulta.setString(1, apodo);
+				connection.prepareStatement("SELECT * FROM usuarios WHERE correo = ? AND contrasenia = ?;");
+		consulta.setString(1, correo);
 		consulta.setString(2, contrasenia);
 		
 		ResultSet resultado = consulta.executeQuery();
@@ -40,9 +40,9 @@ public class UsuariosHelper {
 			String codigo = UUID.randomUUID().toString();
 			session.setAttribute("codigo-autorizacion", codigo);
 			
-			consulta = connection.prepareStatement("UPDATE usuarios SET codigo = ? WHERE apodo = ?");
+			consulta = connection.prepareStatement("UPDATE usuarios SET codigo = ? WHERE correo = ?");
 			consulta.setString(1, codigo);
-			consulta.setString(2, apodo);
+			consulta.setString(2, correo);
 			
 			consulta.executeQuery();
 			
@@ -60,7 +60,7 @@ public class UsuariosHelper {
 		if (codigo != null){
 			//obtener usuario de la base
 			Connection connection;
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ejemplo","postgres","admin");
+			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 			
 			PreparedStatement consulta = 
 					connection.prepareStatement("SELECT * FROM usuarios WHERE codigo = ?;");
@@ -70,7 +70,7 @@ public class UsuariosHelper {
 			
 			if(resultado.next()) {
 				//armar y devolver ese usuario
-				Usuario logueado = new Usuario (resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("contrasenia"), resultado.getBoolean("activo"));
+				Usuario logueado = new Usuario (resultado.getInt("id"), resultado.getString("correo"), resultado.getString("contrasenia"), resultado.getBoolean("administrador"));
 				return logueado;
 			} else {
 				return null;
@@ -90,7 +90,7 @@ public class UsuariosHelper {
 		session.removeAttribute("codigo-autorizacion");
 		
 		Connection connection;
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ejemplo","postgres","admin");
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 		
 		PreparedStatement consulta = 
 				connection.prepareStatement("UPDATE usuarios SET codigo = null WHERE codigo = ?;");
