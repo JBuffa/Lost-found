@@ -138,17 +138,18 @@ public class UsuariosController {
 			int id = resultado.getInt("id");
 			String img_refugio = resultado.getString("img_refugio");
 			String nombre_refugio = resultado.getString("nombre_refugio");
-			String barrio = resultado.getString("barrio");
 			String encargado = resultado.getString("encargado");
-			String contrasenia = resultado.getString("contrasenia");
-			String email = resultado.getString("email");
-			String telefono = resultado.getString("telefono");
+			String barrio = resultado.getString("barrio");
 			String direccion = resultado.getString("direccion");
-			String codigo = resultado.getString("codigo");
+			String telefono = resultado.getString("telefono");
+			String email = resultado.getString("email");
 			String facebook = resultado.getString("facebook");
 			Boolean admin_refugio = resultado.getBoolean("admin_refugio");
+			String contrasenia = resultado.getString("contrasenia");
+			String codigo = resultado.getString("codigo");
 			
-			Refugio x = new Refugio(id, img_refugio, nombre_refugio, barrio, encargado, contrasenia, email, telefono, direccion, codigo, facebook, admin_refugio);
+			Refugio x = new Refugio(id, img_refugio, nombre_refugio, encargado, barrio, direccion, telefono, email, 
+					 facebook, admin_refugio, contrasenia, codigo);
 			listadoRefugio.add(x);
 		}
 		
@@ -303,7 +304,7 @@ public class UsuariosController {
 		}	
 
 	@GetMapping("/insertar-usuario")
-	public String insertUsuario(@RequestParam String nick,@RequestParam String imagen_de_perfil,
+	public String insertUsuario(@RequestParam String nick,@RequestParam String img_perfil,
 			 @RequestParam String correo, @RequestParam String contrasenia, @RequestParam String nombre, @RequestParam String apellido,
 			 @RequestParam (value = "administrador", required = false) boolean administrador) throws SQLException {
 		
@@ -313,9 +314,9 @@ public class UsuariosController {
 				env.getProperty("spring.datasource.password"));
 		
 		PreparedStatement consulta = connection.prepareStatement(
-				"INSERT INTO usuarios(nick, imagen_de_perfil, correo, contrasenia, administrador, nombre, apellido) VALUES( ?, ?, ?, ?, ?, ?, ?); ");
+				"INSERT INTO usuarios(nick, img_perfil, correo, contrasenia, administrador, nombre, apellido) VALUES( ?, ?, ?, ?, ?, ?, ?); ");
 		consulta.setString(1, nick);
-		consulta.setString(2, imagen_de_perfil);
+		consulta.setString(2, img_perfil);
 		consulta.setString(3, correo);
 		consulta.setString(4, contrasenia);
 		consulta.setBoolean(5, administrador);
@@ -330,13 +331,13 @@ public class UsuariosController {
 	
 	
 	@PostMapping("/logear-usuario")
-	public String logearUsuario(HttpSession session, Model template, @RequestParam String correo, @RequestParam String contrasenia) throws SQLException {
+	public String logearUsuario(HttpSession session, Model template, @RequestParam String nick, @RequestParam String contrasenia) throws SQLException {
 	
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 				env.getProperty("spring.datasource.password"));
 		
-		boolean sePudo = UsuariosHelper.intentarLoguearse(session, correo, contrasenia, connection);
+		boolean sePudo = UsuariosHelper.intentarLoguearse(session, nick, contrasenia, connection);
 			
 			if (sePudo){
 				Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
@@ -527,9 +528,9 @@ public class UsuariosController {
 				env.getProperty("spring.datasource.password"));
 		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
 		
-		if (logeado == null || logeado.isAdministrador() == false) {
-			return "redirect:/iniciar_sesion";
-		}
+	//	if (logeado == null || logeado.isAdministrador() == false) {
+		//	return "redirect:/iniciar_sesion";
+	//	}
 		
 		UsuariosHelper.checkearHeader(logeado, template);
 		
@@ -570,17 +571,18 @@ public class UsuariosController {
 			int id = resultadoRefugio.getInt("id");
 			String img_refugio = resultadoRefugio.getString("img_refugio");
 			String nombre_refugio = resultadoRefugio.getString("nombre_refugio");
-			String barrio = resultadoRefugio.getString("barrio");
 			String encargado = resultadoRefugio.getString("encargado");
-			String contrasenia = resultadoRefugio.getString("contrasenia");
-			String email = resultadoRefugio.getString("email");
-			String telefono = resultadoRefugio.getString("telefono");
+			String barrio = resultadoRefugio.getString("barrio");
 			String direccion = resultadoRefugio.getString("direccion");
-			String codigo = resultadoRefugio.getString("codigo");
+			String telefono = resultadoRefugio.getString("telefono");
+			String email = resultadoRefugio.getString("email");
 			String facebook = resultadoRefugio.getString("facebook");
 			Boolean admin_refugio = resultadoRefugio.getBoolean("admin_refugio");
+			String contrasenia = resultadoRefugio.getString("contrasenia");
+			String codigo = resultadoRefugio.getString("codigo");
 			
-			Refugio z = new Refugio(id, img_refugio, nombre_refugio, barrio, encargado, contrasenia, email, telefono, direccion, codigo, facebook, admin_refugio);
+			Refugio z = new Refugio(id, img_refugio, nombre_refugio, encargado, barrio, direccion, telefono, email, 
+					 facebook, admin_refugio, contrasenia, codigo);
 
 			listadoRefugio.add(z);	
 		}

@@ -57,6 +57,7 @@
 	</div>
 	
 	<!-- start page -->
+ <div id="page"><!-- start content -->
  
   <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -86,6 +87,8 @@
                   <th>Castrado</th>
                   <th>Refugio</th>
                   <th>Encargado</th>
+                  <th>Modifcar</th>
+                  <th>Eliminar</th>
                 </tr>
               </thead>
               <tfoot>
@@ -99,6 +102,8 @@
                   <th>Castrado</th>
                   <th>Refugio</th>
                   <th>Encargado</th>
+                  <th>Modifcar</th>
+                  <th>Eliminar</th>
                 </tr>
               </tfoot>
               <tbody th:each="mascota:${listadoMascota}">
@@ -117,6 +122,8 @@
                   <!-- <td><a th:href="'/detalle_refugio/' + ${refugio.id}" th:text="${mascota.refugio}"></a></td>-->
                   
                   <td><a th:text="${mascota.encargado}"></a></td>
+                  <td><a>Modificar</a></td>
+                  <td><a>Eliminar</a></td>
                 </tr>
               </tbody>
             </table>
@@ -150,6 +157,13 @@
                   <th>Nombre</th>
                   <th>Barrio</th>
                   <th>Encargado</th>
+                  <th>Dirección</th>
+                  <th>Email</th>
+                  <th>Telefono</th>
+                  <th>Facebook</th>
+                  <th>Admin.</th>
+                  <th>Modifcar</th>
+                  <th>Eliminar</th>
                 </tr>
               </thead>
               <tfoot>
@@ -158,83 +172,147 @@
                   <th>Nombre</th>
                   <th>Barrio</th>
                   <th>Encargado</th>
+                  <th>Dirección</th>
+                  <th>Email</th>
+                  <th>Telefono</th>
+                  <th>Facebook</th>
+                  <th>Admin.</th>
+                  <th>Modifcar</th>
+                  <th>Eliminar</th>
                 </tr>
               </tfoot>
               <tbody th:each="refugio:${listadoRefugio}">
                 <tr>
                   <td><a th:href="'/detalle_refugio/' + ${refugio.id}">
-	                 	 <img class="refugio-img" th:src="${refugio.img_refugio}"></img>
+	                 	 <img class="admin-img" th:src="${refugio.img_refugio}"  ></img>
 	              </a></td>
-                  <td><a th:href="'/detalle/' + ${refugio.id}" th:text="${refugio.nombre_refugio}" id="fuente_negra"></a></td>
+                  <td><a th:href="'/detalle_refugio/' + ${refugio.id}" th:text="${refugio.nombre_refugio}" id="fuente_negra"></a></td>
+                  <td><label th:text="${refugio.encargado}"></label></td>
                   <td><label th:text="${refugio.barrio}"></label></td>
-                  <td><a th:text="${refugio.encargado}"></a></td>
+                  <td><label th:text="${refugio.direccion}"></label></td>
+                  <td><label th:text="${refugio.telefono}"></label></td>
+                  <td><label th:text="${refugio.email}"></label></td>
+                  <td><a th:src="${refugio.facebook}">Facebook</a></td>
+                  <td><label th:text="${refugio.admin_refugio}"></label></td>
+                  <td><a>Modifcar</a></td>
+                  <td><a>Eliminar</a></td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
-      
+       	 </div>
+     	</div>
+      </div> 
      <!-- /.container-fluid-->
      
-     
-     
     
-     <!-- Page Content -->
-    <div class="container">
-
-      <!-- Page Heading -->
-      <h1 class="my-4">Zoonosis
-        <small>Avisos</small>
-        <a class="btn btn-primary" id="fuente_negra" href="/registrar_avisos">Nuevo Aviso</a>
-      </h1>
-
-      <!-- Project One -->
-      <div class="row margen-listas" th:each="avisos:${listadoAvisos}">
-        <div class="col-md-7" >
-          <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" th:src="${avisos.img_avisos}" alt="" ></img> 
-          </a>
-        </div>
-        <div class="col-md-5">
-          <h3><label th:text="${avisos.titulo}" id="fuente_blanca"> </label></h3>
-          <p><label th:text="${avisos.detalles}"> </label></p>
-        </div>
-      
-      </div>
-
-      <!-- /.row -->
-		
-    </div>
-    <!-- /.container -->
+ 
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/" id="fuente_negra">Zoonosis</a>
+        </li>
+        <li class="breadcrumb-item active">Tabla</li>
+      </ol>
+      <a class="btn btn-primary" id="fuente_negra" href="/registrar_avisos">Ingresar avisos</a>
+      <p></p>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3" id="fuente_negra">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Lista de Avisos</div>
+        <div class="card-body" >
+          <div class="table-responsive" >
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Foto</th>
+                  <th>Titulo</th>
+                  <th>Detalle</th>
+                  <th>Modifcar</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Foto</th>
+                  <th>Titulo</th>
+                  <th>Detalle</th>
+                  <th>Modifcar</th>
+                  <th>Eliminar</th>
+                </tr>
+              </tfoot>
+              <tbody th:each="avisos:${listadoAvisos}">
+                <tr>
+                  <td><img class="refugio-img" th:src="${avisos.img_avisos}"></img></td>
+                  <td><label th:text="${avisos.titulo}" id="fuente_negra"></label></td>
+                  <td><label th:text="${avisos.detalles}"></label></td>
+                  <td><a>Modificar</a></td>
+                  <td><a>Eliminar</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+       	 </div>
+     	</div>
+      </div> 
+     <!-- /.container-fluid-->    
     
-     <!-- Page Content -->
-    <div class="container">
-
-      <!-- Page Heading -->
-      <h1 class="my-4">Se Busca
-        <small>Animales Perdidos</small>
-        <a class="btn btn-primary" id="fuente_negra" href="/registrar_perdido">Nuevo aviso</a>
-      </h1>
-
-      <!-- Project One -->
-      <div class="row margen-listas" th:each="perdidos:${listadoPerdidos}">
-        <div class="col-md-7" >
-          <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" th:src="${perdidos.img_perdido}" alt="" ></img> 
-          </a>
-        </div>
-        <div class="col-md-5">
-          <h3><label th:text="${perdidos.titulo}" id="fuente_blanca"> </label></h3>
-          <p><label th:text="${perdidos.descripcion}"> </label></p>
-          <p>Pertenece a: <label th:text="${perdidos.usuario}"> </label></p>
-        </div>
-      </div>
-      
-      <!-- /.row -->
-
-	</div>
-    <!-- /.container -->
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/" id="fuente_negra">Perdidos</a>
+        </li>
+        <li class="breadcrumb-item active">Tabla</li>
+      </ol>
+      <a class="btn btn-primary" id="fuente_negra" href="/registrar_avisos">Ingresar perdidos</a>
+      <p></p>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3" id="fuente_negra">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Lista de Mascotas Perdidas</div>
+        <div class="card-body" >
+          <div class="table-responsive" >
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Foto</th>
+                  <th>Titulo</th>
+                  <th>Descripción</th>
+                  <th>Pertenece a</th>
+                  <th>Modifcar</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Foto</th>
+                  <th>Titulo</th>
+                  <th>Descripción</th>
+                  <th>Pertenece a</th>
+                  <th>Modifcar</th>
+                  <th>Eliminar</th>
+                </tr>
+              </tfoot>
+              <tbody th:each="perdidos:${listadoPerdidos}">
+                <tr>
+                  <td><img class="refugio-img" th:src="${perdidos.img_perdido}"></img></td>
+                  <td><label th:text="${perdidos.titulo}" id="fuente_negra"></label></td>
+                  <td><label th:text="${perdidos.descripcion}"></label></td>
+                  <td><label th:text="${perdidos.usuario}"></label></td>
+                  <td><a>Modificar</a></td>
+                  <td><a>Eliminar</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+       	 </div>
+     	</div>
+      </div> 
+     <!-- /.container-fluid--> 
+         
+</div> 
     
     
 	<!-- start footer -->

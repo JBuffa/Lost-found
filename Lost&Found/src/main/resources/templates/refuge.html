@@ -58,7 +58,7 @@
                   <td><a th:href="'/detalle_refugio/' + ${refugio.id}">
 	                 	 <img class="refugio-img" th:src="${refugio.img_refugio}"></img>
 	              </a></td>
-                  <td><a th:href="'/detalle/' + ${refugio.id}" th:text="${refugio.nombre_refugio}" id="fuente_negra"></a></td>
+                  <td><a th:href="'/detalle_refugio/' + ${refugio.id}" th:text="${refugio.nombre_refugio}" id="fuente_negra"></a></td>
                   <td><label th:text="${refugio.barrio}"></label></td>
                   <td><a th:text="${refugio.encargado}"></a></td>
                 </tr>

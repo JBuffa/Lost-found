@@ -22,12 +22,12 @@ public class UsuariosHelper {
 	private Environment env;
 	
 	
-	public boolean intentarLoguearse(HttpSession session, String correo, String contrasenia, Connection connection) throws SQLException{
+	public boolean intentarLoguearse(HttpSession session, String nick, String contrasenia, Connection connection) throws SQLException{
 
 		
 		PreparedStatement consulta = connection
-				.prepareStatement("SELECT * FROM usuarios WHERE correo = ? AND contrasenia = ? ");
-		consulta.setString(1, correo);
+				.prepareStatement("SELECT * FROM usuarios WHERE nick = ? AND contrasenia = ? ");
+		consulta.setString(1, nick);
 		consulta.setString(2, contrasenia);
 		ResultSet resultado = consulta.executeQuery();
 		
@@ -40,7 +40,7 @@ public class UsuariosHelper {
 			PreparedStatement consulta2 = connection
 					.prepareStatement("UPDATE usuarios SET codigo = ? WHERE nick = ?");
 			consulta2.setString(1, codigo);
-			consulta2.setString(2, correo);
+			consulta2.setString(2, nick);
 			consulta2.executeUpdate();
 			
 			

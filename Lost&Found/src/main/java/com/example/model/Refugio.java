@@ -2,7 +2,7 @@ package com.example.model;
 
 public class Refugio {
 	public Refugio(int id, String img_refugio, String nombre_refugio,  String barrio, String encargado, String direccion,
-			String email, String telefono, String facebook, String contrasenia, String codigo, boolean admin_refugio) {
+			String email, String telefono, String facebook, boolean admin_refugio, String codigo, String contrasenia) {
 		super();
 		this.id = id;
 		this.img_refugio = img_refugio;
