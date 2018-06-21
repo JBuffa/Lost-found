@@ -34,7 +34,22 @@ public class UsuariosController {
 	//<---seccion de registro--->
 	
 	@GetMapping("/iniciar_sesion")
-	public String iniciarSesion() {
+	public String iniciarSesion(HttpSession session, Model template) throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+
+		if (logeado == null) {
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
+		
 	return "login";
 }
 	
@@ -560,9 +575,8 @@ public class UsuariosController {
 		consulta.setString(7, apellido);
 		consulta.executeUpdate();
 
-		connection.close();
 
-		return "redirect:/registro-usuario";
+		return "redirect:/";
 	}
 	
 	
