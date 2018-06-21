@@ -40,10 +40,10 @@
 					<li><a href="/perdidos">Perdidos</a></li>
 					<li><a href="/zoonosis">Zoonosis</a></li>
 					<li><a href="/nosotros">Nosotros</a></li>
-					<li><a href="/logear-usuario">Perfil</a></li>
-					<li><a href="/iniciar_sesion">Sesion</a></li>
+					<li th:if="${estaLogeado} == true"><a href="/logear-usuario">Perfil</a></li>
+					<li th:if="${estaLogeado} == false"><a href="/iniciar_sesion">Conectarse</a></li>
 			    </ul>
-			    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+			    <a th:if="${estaLogeado} == true" class="nav-link" data-toggle="modal" data-target="#exampleModal">
 			            <i class="fa fa-fw fa-sign-out"></i>Desconectar
 			    </a>
 			</div>
@@ -91,7 +91,7 @@
           <div class="modal-body">Selecciona "Desconectar" abajo si estas listo para teminar la sesion.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="/" id="fuente_negra">Desconectar</a>
+            <a class="btn btn-primary" href="/desconectar" id="fuente_negra">Desconectar</a>
           </div>
         </div>
       </div>

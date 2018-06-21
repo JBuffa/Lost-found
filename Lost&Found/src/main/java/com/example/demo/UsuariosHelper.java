@@ -8,21 +8,13 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
 import com.example.model.Usuario;
 
-@Service
+
 public class UsuariosHelper {
 	
-	@Autowired
-	private Environment env;
 	
-	
-	public boolean intentarLoguearse(HttpSession session, String nick, String contrasenia, Connection connection) throws SQLException{
+	public static boolean intentarLoguearse(HttpSession session, String nick, String contrasenia, Connection connection) throws SQLException{
 
 		
 		PreparedStatement consulta = connection
@@ -65,7 +57,7 @@ public class UsuariosHelper {
 				int id = resultado.getInt("id");
 				session.setAttribute("id", id);
 				Usuario logueado = new Usuario (resultado.getInt("id"), resultado.getString("correo"), resultado.getString("contrasenia"),
-						resultado.getBoolean("administrador"), resultado.getString("imagen_de_perfil"), resultado.getString("nick"), 
+						resultado.getBoolean("administrador"), resultado.getString("img_perfil"), resultado.getString("nick"), 
 						resultado.getString("nombre"), resultado.getString("apellido"), resultado.getString("codigo"));
 				return logueado;
 			
@@ -93,21 +85,5 @@ public class UsuariosHelper {
 
 	}
 	
-	
-	public void checkearHeader(Usuario logeado, Model template) throws SQLException{
-		if (logeado == null) {
-			template.addAttribute("estaLogeado", false);
-		} else {
-			template.addAttribute("estaLogeado", true);
-		
-			template.addAttribute("img_perfil", logeado.getImg_perfil());
-			template.addAttribute("nick", logeado.getNick());
-			
-				if (logeado.isAdministrador() == true) {
-					
-					template.addAttribute("logeadoisadmin", logeado.isAdministrador());
-				}
-		}
-	}
 
 }

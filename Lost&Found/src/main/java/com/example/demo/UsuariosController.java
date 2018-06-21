@@ -30,9 +30,6 @@ public class UsuariosController {
 	@Autowired
 	private Environment env;
 	
-	@Autowired
-	private UsuariosHelper UsuariosHelper;
-	
 	
 	//<---seccion de registro--->
 	
@@ -61,11 +58,6 @@ public class UsuariosController {
 			return "register";
 		}
 		
-	}
-
-	@GetMapping("/desconectarse")
-		public String logout() {
-		return "redirrect:/login";
 	}
 	
 	@GetMapping("/recuperar_contrasenia")
@@ -126,9 +118,18 @@ public class UsuariosController {
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 				env.getProperty("spring.datasource.password"));
+		 
+			Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
 		
+			if (logeado == null) {
+			           template.addAttribute("estaLogeado", false);
+			       } else {
+			           template.addAttribute("estaLogeado", true);
+			       }
+	
 		PreparedStatement consulta = 
 				connection.prepareStatement("SELECT * FROM refugio;");
+		
 		
 		ResultSet resultado = consulta.executeQuery();
 		
@@ -161,11 +162,22 @@ public class UsuariosController {
 	
 	// muestra un refugio en detalle
 	@GetMapping("/detalle_refugio/{id}")
-	public String detalleRefugio(Model template, @PathVariable int id) throws SQLException {
+	public String detalleRefugio(HttpSession session, Model template, @PathVariable int id) throws SQLException {
 		
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 				env.getProperty("spring.datasource.password"));
+		
+		 
+			Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+			if (logeado == null) {
+			           template.addAttribute("estaLogeado", false);
+			       } else {
+			           template.addAttribute("estaLogeado", true);
+			       }
+		
+		
 		
 		PreparedStatement consulta = 
 				connection.prepareStatement("SELECT * FROM refugio WHERE id = ?;");
@@ -212,6 +224,16 @@ public class UsuariosController {
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 				env.getProperty("spring.datasource.password"));
 		
+		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		if (logeado == null) {
+		           template.addAttribute("estaLogeado", false);
+		       } else {
+		           template.addAttribute("estaLogeado", true);
+		       }
+		
+		
 		PreparedStatement consulta = 
 				connection.prepareStatement("SELECT * FROM mascota;");
 		
@@ -244,11 +266,22 @@ public class UsuariosController {
 	
 	// muestra una mascota en detalle
 		@GetMapping("/detalle_mascota/{id}")
-		public String detalleMascota(Model template, @PathVariable int id) throws SQLException {
+		public String detalleMascota(HttpSession session, Model template, @PathVariable int id) throws SQLException {
 			
 			Connection connection;
 			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 					env.getProperty("spring.datasource.password"));
+			
+			
+			Usuario logeado = UsuariosHelper.usuarioLogeado(session, connection);
+			
+			if (logeado == null) {
+			           template.addAttribute("estaLogeado", false);
+			       } else {
+			           template.addAttribute("estaLogeado", true);
+			       }
+		
+			
 			
 			PreparedStatement consulta = 
 					connection.prepareStatement("SELECT * FROM mascota WHERE id = ?;");
@@ -290,13 +323,18 @@ public class UsuariosController {
 	//<---Registro usuario--->
 	
 		@GetMapping("/registro-usuario")
-		public String registroUsuario(HttpSession session,Model template) throws SQLException {
+		public String registroUsuario(HttpSession session, Model template) throws SQLException {
 			Connection connection;
 			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 					env.getProperty("spring.datasource.password"));
-			Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
 			
-			UsuariosHelper.checkearHeader(logeado, template);
+			Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+
+			if (logeado == null) {
+		           template.addAttribute("estaLogeado", false);
+		       } else {
+		           template.addAttribute("estaLogeado", true);
+		       }
 			
 			connection.close();
 			
@@ -483,8 +521,7 @@ public class UsuariosController {
 	// muestra el listado completo de avisos
 	@GetMapping("/zoonosis")
 	public String listado( HttpSession session, Model template) throws SQLException {
-		
-
+	
 		
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
@@ -513,7 +550,21 @@ public class UsuariosController {
 	}
 	
 	
-	
+	// desconecta session
+	@GetMapping("/desconectar")
+	public String desconecta( HttpSession session, Model template) throws SQLException {
+		
+		        Connection connection;
+		        connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+		                env.getProperty("spring.datasource.password"));
+		        com.example.demo.UsuariosHelper.cerrarSesion(session, connection);
+		        
+		        
+		        connection.close();
+		        
+
+		return "redirect:/";
+		 }		
 	
 	
 	
@@ -526,14 +577,20 @@ public class UsuariosController {
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 				env.getProperty("spring.datasource.password"));
+		
 		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
 		
-	//	if (logeado == null || logeado.isAdministrador() == false) {
-		//	return "redirect:/iniciar_sesion";
-	//	}
+		if (logeado == null) {
+	           template.addAttribute("estaLogeado", false);
+	       } else {
+	           template.addAttribute("estaLogeado", true);
+	       }
 		
-		UsuariosHelper.checkearHeader(logeado, template);
-		
+		if (logeado == null || logeado.isAdministrador() == false) {
+			return "redirect:/iniciar_sesion";
+		}
+
+
 		PreparedStatement consultaMascota = connection.prepareStatement("SELECT * FROM Mascota ORDER BY id ASC;");
 
 		ResultSet resultadoMascota = consultaMascota.executeQuery();

@@ -4,7 +4,7 @@ $(document).ready(function() {
     
         cloudinary.openUploadWidget({
     
-        upload_preset : 'fnggqfiz', 
+        upload_preset : 'z3v19ihe', 
         cloud_name: 'dfwlfvd87',
         theme: 'white',
         multiple: true,
@@ -14,10 +14,10 @@ $(document).ready(function() {
         folder: 'LostFound/avisos',
         sources: [ 'local', 'url', 'facebook'], 
     }, function(error, result) {
-        if (result && result !==[]){ 
+       
             var url = result[0].secure_url ;
             $("form").find("#imagen_avisos").val(url);    
-        }
+        
        
         });
         
@@ -28,7 +28,7 @@ $(document).ready(function() {
     
         cloudinary.openUploadWidget({
     
-        upload_preset : 'fnggqfiz', 
+        upload_preset : 'z3v19ihe', 
         cloud_name: 'dfwlfvd87',
         theme: 'white',
         multiple: true,
@@ -38,10 +38,10 @@ $(document).ready(function() {
         folder: 'LostFound/mascota',
         sources: [ 'local', 'url', 'facebook'], 
     }, function(error, result) {
-        if (result && result !==[]){ 
+        
             var url = result[0].secure_url ;
             $("form").find("#imagen_mascota").val(url);    
-        }
+        
        
         });
         
@@ -52,7 +52,7 @@ $(document).ready(function() {
         
         cloudinary.openUploadWidget({
     
-        upload_preset : 'fnggqfiz', 
+        upload_preset : 'z3v19ihe', 
         cloud_name: 'dfwlfvd87',
         theme: 'white',
         multiple: true,
@@ -62,10 +62,10 @@ $(document).ready(function() {
         folder: 'LostFound/perdidos',
         sources: [ 'local', 'url', 'facebook'], 
     }, function(error, result) {
-        if (result && result !==[]){ 
+        
             var url = result[0].secure_url ;
             $("form").find("#imagen_perdidos").val(url);    
-        }
+        
        
         });
         
@@ -75,7 +75,7 @@ $(document).ready(function() {
         
         cloudinary.openUploadWidget({
     
-        upload_preset : 'fnggqfiz', 
+        upload_preset : 'z3v19ihe', 
         cloud_name: 'dfwlfvd87',
         theme: 'white',
         multiple: true,
@@ -85,10 +85,10 @@ $(document).ready(function() {
         folder: 'LostFound/refugio',
         sources: [ 'local', 'url', 'facebook'], 
     }, function(error, result) {
-        if (result && result !==[]){ 
+        
             var url = result[0].secure_url ;
             $("form").find("#imagen_refugio").val(url);    
-        }
+        
        
         });
         
@@ -99,7 +99,7 @@ $(document).ready(function() {
         
         cloudinary.openUploadWidget({
     
-        upload_preset : 'fnggqfiz', 
+        upload_preset : 'z3v19ihe', 
         cloud_name: 'dfwlfvd87',
         theme: 'white',
         multiple: true,
@@ -109,10 +109,10 @@ $(document).ready(function() {
         folder: 'LostFound/usuario',
         sources: [ 'local', 'url', 'facebook'], 
     }, function(error, result) {
-        if (result && result !==[]){ 
+        
             var url = result[0].secure_url ;
             $("form").find("#imagen_usuario").val(url);    
-        }
+        
        
         });
         
