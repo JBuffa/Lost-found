@@ -68,13 +68,18 @@ public class UsuariosHelper {
 			
 			ResultSet resultado = consulta.executeQuery();
 			
-			if(resultado.next()) {
-				//armar y devolver ese usuario
-				Usuario logueado = new Usuario (resultado.getInt("id"), resultado.getString("correo"), resultado.getString("contrasenia"), resultado.getBoolean("administrador"));
+			if (resultado.next()){
+				int id = resultado.getInt("id");
+				session.setAttribute("id", id);
+				Usuario logueado = new Usuario (resultado.getInt("id"), resultado.getString("correo"), resultado.getString("contrasenia"),
+						resultado.getBoolean("administrador"), resultado.getString("imagen_de_perfil"), resultado.getString("nick"), 
+						resultado.getString("nombre"), resultado.getString("apellido"), resultado.getString("codigo"));
+				
 				return logueado;
 			} else {
 				return null;
 			}
+			
 		
 		} else {
 			return null;

@@ -5,6 +5,7 @@ html {
 
 body {
   overflow-x: hidden;
+  color: #ABABAB;
 }
 
 body.sticky-footer {
@@ -16,7 +17,7 @@ body.sticky-footer .content-wrapper {
 }
 
 body.fixed-nav {
-  padding-top: 56px;
+  padding-top: 0px;
 }
 
 .content-wrapper {
@@ -33,7 +34,7 @@ body.fixed-nav {
   height: 50px;
   text-align: center;
   color: white;
-  background: rgba(52, 58, 64, 0.5);
+  background: #4a535b;
   line-height: 45px;
 }
 
@@ -42,7 +43,7 @@ body.fixed-nav {
 }
 
 .scroll-to-top:hover {
-  background: #343a40;
+  background: rgba(175, 204, 69, 0.5);
 }
 
 .scroll-to-top i {
@@ -486,6 +487,7 @@ footer.sticky-footer {
  
  .perfil-img{
   width: 100%;
+  margin: 15px 0px;
 }
 
 b, strong {
@@ -504,6 +506,25 @@ b, strong {
 	padding: 5px;
 }
  
+ .mascota-img{
+   height: 56px;
+ }
  
+ .refugio-img{
+   width: 300px;
+ }
+ 
+ 
+  .tamanio{
+   height: 150px;
+ }
+ 
+  .margen-listas{
+   margin: 10px;
+ }
+ 
+ .fuente-blanca{
+   color: #FFFFFF;
+ }
  
 }

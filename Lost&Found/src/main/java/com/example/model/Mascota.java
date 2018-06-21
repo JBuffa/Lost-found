@@ -9,20 +9,26 @@ public class Mascota {
 	private String img_mascota;
 	private String refugio;
 	private String raza;
-	private String vacunas;
+	private String vacuna;
+	private String clasificacion;
 	private String adoptante;
+	private Boolean adoptado;
 	
-	public Mascota(int id, String nombre_mascota, String edad, String encargado, String castrado, String img_mascota, String raza,  String vacunas, String refugio, String adoptante) {
+	public Mascota(int id, String img_mascota, String nombre_mascota, String edad, String clasificacion, String raza, 
+			String vacuna, String castrado, String refugio, String encargado, String adoptante, Boolean adoptado) {
+		
 		this.id = id;
+		this.img_mascota = img_mascota;
 		this.nombre_mascota = nombre_mascota;
 		this.edad = edad;
-		this.encargado = encargado;
-		this.castrado = castrado;
-		this.img_mascota = img_mascota;
-		this.refugio = refugio;
+		this.clasificacion = clasificacion;
 		this.raza = raza;
-		this.vacunas = vacunas;
+		this.vacuna = vacuna;
+		this.castrado = castrado;
+		this.refugio = refugio;
+		this.encargado = encargado;
 		this.adoptante = adoptante;
+		this.adoptado = adoptado;
 	}
 
 	public int getId() {
@@ -83,12 +89,12 @@ public class Mascota {
 		this.raza = raza;
 	}
 
-	public String getVacunas() {
-		return vacunas;
+	public String getVacuna() {
+		return vacuna;
 	}
 
-	public void setVacunas(String vacunas) {
-		this.vacunas = vacunas;
+	public void setVacuna(String vacuna) {
+		this.vacuna = vacuna;
 	}
 	
 
@@ -109,6 +115,22 @@ public class Mascota {
 	}
 
 	
+	public Boolean getAdoptado() {
+		return adoptado;
+	}
+
+	public void setAdoptado(Boolean adoptado) {
+		this.adoptado = adoptado;
+	}
+
+	public String getClasificacion() {
+		return clasificacion;
+	}
+
+	public void setClasificacion(String clasificacion) {
+		this.clasificacion = clasificacion;
+	}
+
 	
 	
 }

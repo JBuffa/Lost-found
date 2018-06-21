@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorator="index">
+
+<head>
+  <meta charset="utf-8"></meta>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+  <meta name="description" content=""></meta>
+  <meta name="author" content=""></meta>
+  <title>Lost&amp;Found</title>
+  <!-- Bootstrap core CSS-->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+  <!-- Custom fonts for this template-->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet"></link>
+</head>
+
+<body layout:fragment="contenido-web">
+  <div class="container">
+    <div class="card card-register mx-auto mt-5" id="fuente_negra">
+      <div class="card-header">Registrar una cuenta</div>
+      <div class="card-body">
+        <form action="/insertar-usuario">
+          <div class="form-group">
+            <div class="form-row">
+                <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputName">Nombre</label>
+                <input class="form-control" id="exampleInputName" type="text" placeholder="Ingresar Nombre" th:value="${nombre}"></input>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputLastName">Apellido</label>
+                <input class="form-control" id="exampleInputLastName type="text" placeholder="Ingresar Apellido" th:value="${contrasenia2}"></input>
+              </div>
+            </div>
+              <div class="col-md-6">
+                <label for="exampleInputName">Nick</label>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar Nick" th:value="${nick}"></input>
+              </div>
+              <div class="col-md-6">
+               <label><a href="#" id="upload_widget_opener5">Cargar foto</a></label>
+                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Ingresar URL" th:value="${imagen_de_perfil}"></input>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Ingresar email" th:value="${correo}"></input>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Contraseña</label>
+                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Contraseña" th:value="${contrasenia}"></input>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleConfirmPassword">Confirmar contraseña</label>
+                <input class="form-control" id="exampleConfirmPassword" type="password" placeholder="Confirmar Contraseña" th:value="${contrasenia2}"></input>
+              </div>
+            </div>
+          </div>
+          <input type="submit" class="btn btn-primary btn-block" id="fuente_negra" value="Registrar"></input>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="/login">Iniciar Sesion</a>
+          <a class="d-block small" href="/forgot-password">¿Olvidaste tu contraseña?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+
+</html>

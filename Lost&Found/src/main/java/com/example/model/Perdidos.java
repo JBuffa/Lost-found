@@ -1,19 +1,29 @@
 package com.example.model;
 
 public class Perdidos {
+	public Perdidos(Boolean encontrado) {
+		super();
+		this.encontrado = encontrado;
+	}
+
+	public Perdidos(int id, String img_perdido, String titulo, String descripcion, String usuario,  Boolean encontrado) {
+		super();
+		this.id = id;
+		this.img_perdido = img_perdido;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.usuario = usuario;
+		this.encontrado = encontrado;
+	}
+
 	private int id;
 	private String img_perdido;
 	private String descripcion;
 	private String usuario;
+	private String titulo;
+	private Boolean encontrado;
 
-	
-	public Perdidos(int id, String img_perdido, String descripcion,  String usuario) {
-		this.id = id;
-		this.img_perdido= img_perdido;
-		this.descripcion = descripcion;
-		this.usuario = usuario;
 
-	}
 
 	public int getId() {
 		return id;
@@ -47,7 +57,21 @@ public class Perdidos {
 		this.usuario = usuario;
 	}
 
-	
-	
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public Boolean getEncontrado() {
+		return encontrado;
+	}
+
+	public void setEncontrado(Boolean encontrado) {
+		this.encontrado = encontrado;
+	}
+
 	
 }

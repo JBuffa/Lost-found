@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" layout:decorator="frame">
+<html lang="en" layout:decorator="index">
 
 <head>
   <meta charset="utf-8"></meta>
@@ -20,25 +20,22 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top" layout:fragment="contenido-web">
  
 
+    <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/">Refugio</a>
+          <a href="/" id="fuente_negra">Refugio</a>
         </li>
         <li class="breadcrumb-item active">Tabla</li>
       </ol>
-      
-        <form action="/procesarBusqueda">
-			<input type="text" name="palabraBuscada"></input>
-			<input type="submit" value="Buscar"></input>
-		</form>
-		
+      <a class="btn btn-primary" id="fuente_negra" href="/registrar_refugio">Ingresar refugio</a>
+      <p></p>
       <!-- Example DataTables Card-->
-      <div class="card mb-3">
+      <div class="card mb-3" id="fuente_negra">
         <div class="card-header">
-          <i class="fa fa-table"></i> Lista de refugios</div>
-        <div class="card-body">
-          <div class="table-responsive">
+          <i class="fa fa-table"></i> Lista de Refugios</div>
+        <div class="card-body" >
+          <div class="table-responsive" >
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
@@ -48,21 +45,45 @@
                   <th>Encargado</th>
                 </tr>
               </thead>
-              <tbody>
+              <tfoot>
                 <tr>
                   <th>Foto</th>
                   <th>Nombre</th>
                   <th>Barrio</th>
                   <th>Encargado</th>
                 </tr>
+              </tfoot>
+              <tbody th:each="refugio:${listadoRefugio}">
+                <tr>
+                  <td><a th:href="'/detalle_refugio/' + ${refugio.id}">
+	                 	 <img class="refugio-img" th:src="${refugio.img_refugio}"></img>
+	              </a></td>
+                  <td><a th:href="'/detalle/' + ${refugio.id}" th:text="${refugio.nombre_refugio}" id="fuente_negra"></a></td>
+                  <td><label th:text="${refugio.barrio}"></label></td>
+                  <td><a th:text="${refugio.encargado}"></a></td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
- 
-    <!-- /.container-fluid-->
- 
+      
+     <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+ 	<!-- Bootstrap core JavaScript-->
+ 	<script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="/static/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/static/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="/static/js/sb-admin-datatables.min.js"></script> 
+    </div>
+
 
 </body>
 </html>

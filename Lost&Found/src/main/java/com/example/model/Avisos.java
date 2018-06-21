@@ -7,11 +7,12 @@ public class Avisos {
 	private String titulo;
 
 	
-	public Avisos(int id, String detalles, String img_avisos, String  titulo) {
+	public Avisos(int id, String img_avisos, String  titulo, String detalles) {
 		this.id = id;
-		this.detalles = detalles;
 		this.img_avisos = img_avisos;
 		this.titulo = titulo;
+		this.detalles = detalles;
+		
 	}
 
 	public int getId() {

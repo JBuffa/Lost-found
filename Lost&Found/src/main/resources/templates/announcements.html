@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" layout:decorator="frame">
+<html lang="en" layout:decorator="index">
 
 	<head>
 	  <meta charset="utf-8"></meta>
@@ -22,77 +22,27 @@
     <div class="container">
 
       <!-- Page Heading -->
-      <h1 class="my-4">Se busca
-        <small>Mascota perdida</small>
+      <h1 class="my-4">Zoonosis
+        <small>Avisos</small>
+        <a class="btn btn-primary" id="fuente_negra" href="/registrar_avisos">Nuevo Aviso</a>
       </h1>
 
       <!-- Project One -->
-      <div class="row">
-        <div class="col-md-7">
+      <div class="row margen-listas" th:each="avisos:${listadoAvisos}">
+        <div class="col-md-7" >
           <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt=""></img> 
+            <img class="img-fluid rounded mb-3 mb-md-0" th:src="${avisos.img_avisos}" alt="" ></img> 
           </a>
         </div>
         <div class="col-md-5">
-          <h3>Project One</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-          <a class="btn btn-primary" href="#">View Project</a>
+          <h3><label th:text="${avisos.titulo}" id="fuente_blanca"> </label></h3>
+          <p><label th:text="${avisos.detalles}"> </label></p>
         </div>
+      
       </div>
+
       <!-- /.row -->
-
-      <hr>
-
-      <!-- Project Two -->
-      <div class="row">
-        <div class="col-md-7">
-          <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt=""></img>
-          </a>
-        </div>
-        <div class="col-md-5">
-          <h3>Project Two</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
-          <a class="btn btn-primary" href="#">View Project</a>
-        </div>
-      </div>
-      <!-- /.row -->
-
-      <hr>
-
-      <!-- Project Three -->
-      <div class="row">
-        <div class="col-md-7">
-          <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt=""></img>
-          </a>
-        </div>
-        <div class="col-md-5">
-          <h3>Project Three</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!</p>
-          <a class="btn btn-primary" href="#">View Project</a>
-        </div>
-      </div>
-      <!-- /.row -->
-
-      <hr>
-
-      <!-- Project Four -->
-      <div class="row">
-
-        <div class="col-md-7">
-          <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="https://res.cloudinary.com/dfwlfvd87/image/upload/v1528926107/34809162_1773374612700830_8003551030723739648_n.jpg" alt=""></img>
-          </a>
-        </div>
-        <div class="col-md-5">
-          <h3>Titulo</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit?</p>
-          <a class="btn btn-primary" href="#">View Project</a>
-        </div>
-      </div>
-      <!-- /.row -->
-
+		
     </div>
     <!-- /.container -->
 	</body>

@@ -1,81 +1,106 @@
 package com.example.model;
 
 public class Refugio {
+	public Refugio(int id, String img_refugio, String nombre_refugio,  String barrio, String encargado, String direccion,
+			String email, String telefono, String facebook, String contrasenia, String codigo, boolean admin_refugio) {
+		super();
+		this.id = id;
+		this.img_refugio = img_refugio;
+		this.nombre_refugio = nombre_refugio;
+		this.barrio = barrio;
+		this.encargado = encargado;
+		this.direccion = direccion;
+		this.email = email;
+		this.telefono = telefono;
+		this.facebook = facebook;
+		this.contrasenia = contrasenia;
+		this.codigo = codigo;
+		this.admin_refugio = admin_refugio;
+	}
 	private int id;
-	private String nick;
+	private String img_refugio;
+	private String nombre_refugio;
+	private String barrio;
+	private String encargado;
+	private String email;
+	private String direccion;
+	private String telefono;
+	private String facebook;
 	private String contrasenia;
 	private String codigo;
-	private String correo;
-	private String imagen_de_perfil;
-	private boolean administrador;
-	
-	public Refugio(int id, String nick, String contrasenia, boolean administrador, String codigo, String correo, String imagen_de_perfil) {
-		this.id = id;
-		this.nick = nick;
-		this.contrasenia = contrasenia;
-		this.administrador = administrador;
-		this.codigo = codigo;
-		this.correo = correo;
-		this.imagen_de_perfil = imagen_de_perfil;
-	}
-
+	private boolean admin_refugio;
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public String getCodigo() {
-		return codigo;
+	public String getNombre_refugio() {
+		return nombre_refugio;
 	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setNombre_refugio(String nombre_refugio) {
+		this.nombre_refugio = nombre_refugio;
 	}
-
 	public String getContrasenia() {
 		return contrasenia;
 	}
-
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
-
-	public boolean isAdministrador() {
-		return administrador;
+	public String getEmail() {
+		return email;
 	}
-
-	public void setAdministrador(boolean administrador) {
-		this.administrador = administrador;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	public String getCorreo() {
-		return correo;
+	public String getDireccion() {
+		return direccion;
 	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
-
-	public String getImagen_de_perfil() {
-		return imagen_de_perfil;
+	public String getBarrio() {
+		return barrio;
 	}
-
-	public void setImagen_de_perfil(String imagen_de_perfil) {
-		this.imagen_de_perfil = imagen_de_perfil;
+	public void setBarrio(String barrio) {
+		this.barrio = barrio;
 	}
-
-	public String getNick() {
-		return nick;
+	public String getEncargado() {
+		return encargado;
 	}
-
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setEncargado(String encargado) {
+		this.encargado = encargado;
 	}
-
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	public String getImg_refugio() {
+		return img_refugio;
+	}
+	public void setImg_refugio(String img_refugio) {
+		this.img_refugio = img_refugio;
+	}
+	public boolean isAdmin_refugio() {
+		return admin_refugio;
+	}
+	public void setAdmin_refugio(boolean admin_refugio) {
+		this.admin_refugio = admin_refugio;
+	}
 	
-	
+	public String getFacebook() {
+		return facebook;
+	}
+	public void setFacebook(String facebook) {
+		this.facebook = facebook;
+	}
 	
 }

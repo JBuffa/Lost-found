@@ -2,6 +2,8 @@ package com.example.model;
 
 public class Usuario {
 	private int id;
+	private String nombre;
+	private String apellido;
 	private String nick;
 	private String contrasenia;
 	private String codigo;
@@ -9,8 +11,10 @@ public class Usuario {
 	private String imagen_de_perfil;
 	private boolean administrador;
 	
-	public Usuario(int id, String nick, String contrasenia, boolean administrador, String codigo, String correo, String imagen_de_perfil) {
+	public Usuario(int id, String nombre, String apellido, boolean administrador, String contrasenia, String nick, String codigo, String correo, String imagen_de_perfil) {
 		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
 		this.nick = nick;
 		this.contrasenia = contrasenia;
 		this.administrador = administrador;
@@ -67,6 +71,22 @@ public class Usuario {
 		this.imagen_de_perfil = imagen_de_perfil;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
 	public String getNick() {
 		return nick;
 	}
@@ -75,7 +95,6 @@ public class Usuario {
 		this.nick = nick;
 	}
 
-	
 	
 	
 }

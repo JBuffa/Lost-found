@@ -1,0 +1,58 @@
+<html lang="en" layout:decorator="index">
+
+<head>
+  <meta charset="utf-8"></meta>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+  <meta name="description" content=""></meta>
+  <meta name="author" content=""></meta>
+  <title>Lost&amp;Found</title>
+  <!-- Bootstrap core CSS-->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+  <!-- Custom fonts for this template-->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet"></link>
+</head>
+
+<body layout:fragment="contenido-web">
+  <div class="container">
+    <div class="card card-register mx-auto mt-5" id="fuente_negra">
+      <div class="card-header" >Registar una Mascota Perdida</div>
+      <div class="card-body">
+        <form action="/insertar-perdido">
+          <div class="form-group">
+              <label><a href="#" id="upload_widget_opener3">Cargar foto</a></label>
+            <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="O ingresar URL" th:value="${img_perdido}"></input>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputName">Titulo</label>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar titulo" th:value="${titulo}"></input>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputLastName">Usuario</label>
+                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Ingreasar usuario" th:value="${usuario}"></input>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label id="upload_widget_opener">Descripción</label>
+            <br></br>
+            <textarea class="text-com coment-area" id="comentario-nuevo" th:text="${descripcion}" rows="8" cols="82" placeholder="Ingresar descripción"></textarea>
+          </div>
+         <input type="submit" class="btn btn-primary btn-block" id="fuente_negra" value="Registrar"></input>
+        </form>
+ 
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+
+</html>

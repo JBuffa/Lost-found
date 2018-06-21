@@ -1,70 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" layout:decorator="frame">
+<html lang="en" layout:decorator="index">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <meta charset="utf-8"></meta>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+  <meta name="description" content=""></meta>
+  <meta name="author" content=""></meta>
   <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
   <!-- Custom fonts for this template-->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
   <!-- Page level plugin CSS-->
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"></link>
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="/css/sb-admin.css" rel="stylesheet"></link>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top" layout:fragment="contenido-web">
  
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/" id="fuente_negra">Adopción</a>
+        </li>
+        <li class="breadcrumb-item active">Tabla</li>
+      </ol>
+      <a class="btn btn-primary" href="/registrar_mascota" id="fuente_negra">Ingresar Mascota</a>
+      <p></p>
       <!-- Example DataTables Card-->
-      <div class="card mb-3">
+      <div class="card mb-3" id="fuente_negra">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Example</div>
+          <i class="fa fa-table"></i> Lista de Adopción</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
-        <form action="/procesarBusqueda">
-			<input type="text" name="palabraBuscada"></input>
-			<input type="submit" value="Buscar"></input>
-		</form>
-	
-		<label>Seleccionar todas:</label>
-		<input type="checkbox" id="seleccionarTodas"></input>
-		
-		<div class="tarjeta-usuario" th:each="usuario:${listadoUsuarios}">
-			<label>nombre: </label><a th:href="'/detalle/' + ${usuario.id}" th:text="${usuario.nombre}">to</a><br></br>
-			<label>contrasenia: </label><label th:text="${usuario.contrasenia}">1234</label><br></br>
-			<label>activo: </label><label th:text="${usuario.activo}">true</label><br></br>
-			<a th:href="'/eliminar/' + ${usuario.id}">X</a>
-		</div>
-             
-             
-             
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                <tr>
+                  <th>Foto</th>
+                  <th>Nombre</th>
+                  <th>Edad</th>
+                  <th>clasificación</th>
+                  <th>Raza</th>
+                  <th>Vacunas</th>
+                  <th>Castrado</th>
+                  <th>Refugio</th>
+                  <th>Encargado</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Foto</th>
+                  <th>Nombre</th>
+                  <th>Edad</th>
+                  <th>clasificación</th>
+                  <th>Raza</th>
+                  <th>Vacunas</th>
+                  <th>Castrado</th>
+                  <th>Refugio</th>
+                  <th>Encargado</th>
+                </tr>
+              </tfoot>
+              <tbody th:each="mascota:${listadoMascota}">
+                <tr>
+                  <td><a th:href="'/detalle_mascota/' + ${mascota.id}">
+	                 	 <img class="mascota-img" th:src="${mascota.img_mascota}"></img>
+	              </a></td>
+	              <td><a th:href="'/detalle_mascota/' + ${mascota.id}" th:text="${mascota.nombre_mascota}" id="fuente_negra"></a></td>
+	              <td><label th:text="${mascota.edad}"></label></td>
+	              <td><label th:text="${mascota.clasificacion}"></label></td>
+	              <td><label th:text="${mascota.raza}"></label></td>
+	              <td><label th:text="${mascota.vacuna}"></label></td>
+	              <td><label th:text="${mascota.castrado}"></label></td>
+	              <td><label th:text="${mascota.refugio}"></label></td>
+	              
+                  <!-- <td><a th:href="'/detalle_refugio/' + ${refugio.id}" th:text="${mascota.refugio}"></a></td>-->
+                  
+                  <td><a th:text="${mascota.encargado}"></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
     <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
  
-   
-   
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
-  </div>
+
 </body>
 
 </html>
