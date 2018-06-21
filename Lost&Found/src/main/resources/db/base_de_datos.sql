@@ -7,8 +7,8 @@ CREATE SEQUENCE public."Avisos_id_seq"
     MAXVALUE 2147483647
     CACHE 1;
 
-ALTER SEQUENCE public."Avisos_id_seq"
-    OWNER TO postgres;
+-- ALTER SEQUENCE public."Avisos_id_seq"
+--     OWNER TO postgres;
     
 -- Table: public.avisos
 
@@ -27,8 +27,8 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.avisos
-    OWNER to postgres;
+--ALTER TABLE public.avisos
+--    OWNER to postgres;
     
 INSERT INTO avisos (img_avisos ,titulo, detalles) VALUES ('https://res.cloudinary.com/dfwlfvd87/image/upload/v1528926106/31277546_1730480766990215_2245429208954175488_n.jpg', 'FESTEJÁ EL DÍA DEL ANIMAL VACUNANDO A TU MASCOTA', 'El domingo 29 de abril celebramos el Día del Animal con una jornada de vacunación antirrábica gratuita en la Reserva. Recordá que es necesario presentar DNI y un servicio que acredite tu domicilio en Morón.');
 INSERT INTO avisos (img_avisos ,titulo, detalles) VALUES ('https://res.cloudinary.com/dfwlfvd87/image/upload/v1528926106/31963901_1744544998917125_5035053352954626048_n.jpg', '¡TRAÉ A TU MASCOTA!', 'La vacuna antirrábica se aplica sin turno previo y las castraciones son con cupos limitados, reservando turno 10 a 13.30h en el mismo lugar donde se realizará la intervención. Durante la semana la atención será de 9 a 12.30h. Recordá que tenés que presentar el DNI y un servicio que acredite el domicilio en Morón. Para más información comunicarse al 4645-1264/1726 o vía mail a cemsa@moron.gob.ar. Se suspende por lluvia. ¡Te esperamos!');
@@ -45,8 +45,8 @@ CREATE SEQUENCE public.mascota_id_seq
     MAXVALUE 2147483647
     CACHE 1;
 
-ALTER SEQUENCE public.mascota_id_seq
-    OWNER TO postgres;    
+--ALTER SEQUENCE public.mascota_id_seq
+--    OWNER TO postgres;    
     
 -- Table: public.mascota
 
@@ -73,8 +73,8 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.mascota
-    OWNER to postgres;
+--ALTER TABLE public.mascota
+--    OWNER to postgres;
     
  
 INSERT INTO mascota (nombre_mascota, edad, clasificacion , raza, vacuna, castrado, refugio, encargado, img_mascota, adoptante, adoptado) VALUES ('Tamy', '4', 'perro', 'desconocida', 'completas', 'si', 'refugio101', 'Fran2014', 'https://res.cloudinary.com/dfwlfvd87/image/upload/v1529285848/LostFound/mascota/25550167_2306464702704362_7298319902006946966_n.jpg','nadie', false);    
@@ -91,8 +91,8 @@ CREATE SEQUENCE public."Perdidos_id_seq"
     MAXVALUE 2147483647
     CACHE 1;
 
-ALTER SEQUENCE public."Perdidos_id_seq"
-    OWNER TO postgres;
+--ALTER SEQUENCE public."Perdidos_id_seq"
+--    OWNER TO postgres;
     
 -- Table: public.perdidos
 
@@ -112,8 +112,8 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.perdidos
-    OWNER to postgres;
+--ALTER TABLE public.perdidos
+--    OWNER to postgres;
     
 INSERT INTO perdidos (img_perdido ,titulo, descripcion, usuario) VALUES ('https://res.cloudinary.com/dfwlfvd87/image/upload/v1528926107/26904094_559780924379914_7230938535129990424_n.jpg', 'AYUDAR A PAMELA A ENCONTRAR A SU PERRITA MÍA', 'Estoy cansada de publicar y que no me den pelota , la quiero encontrar y nadie ni siquiera apreta compartir , lo hacen con todos y a mi ni mg le ponen a la publi ?? voy a ponerlo una vez mas , se llama mia y desaparecio en ramos mejia la calle sgto cabral y rawson , responde a su nombre y hace 4 semanas no se nada de ella , se crio conmigo y no tenerla me hace mal saben? Porfavor difundanlo y si saben algo mi numero es 1534950474 ( pamela) y otro es 1554850134 (teresa) gracias...', '1');
 INSERT INTO perdidos (img_perdido ,titulo, descripcion, usuario) VALUES ('https://res.cloudinary.com/dfwlfvd87/image/upload/v1528926107/26167290_10215601649333834_878326526294533597_n.jpg', 'Perdido en Haedo', 'Amigos Tobi se fue de casa ayer a la madrugada, en la zona de Haedo Norte. Si alguno lo ve ya sea en la calle o en alguna pagina de perros encontrados me pega un llamadito? 155455-8556. Muchas gracias', '3');
@@ -129,8 +129,8 @@ CREATE SEQUENCE public."Refugio_id_seq"
     MAXVALUE 2147483647
     CACHE 1;
 
-ALTER SEQUENCE public."Refugio_id_seq"
-    OWNER TO postgres;
+--ALTER SEQUENCE public."Refugio_id_seq"
+--    OWNER TO postgres;
     
 -- Table: public.refugio
 
@@ -157,8 +157,8 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.refugio
-    OWNER to postgres;
+--ALTER TABLE public.refugio
+--    OWNER to postgres;
     
 INSERT INTO refugio (nombre_refugio , contrasenia, email, telefono, barrio, direccion, admin_refugio, img_refugio, encargado, facebook) VALUES ('refugio101', '123', 'fran_2014@gmail.com', '4459 2250', 'Moron', 'Rivadavia 22222', true, 'https://res.cloudinary.com/dfwlfvd87/image/upload/v1528968398/1360351510_895606_1360351712_noticia_normal.jpg', 'Susana Miler', 'https://www.facebook.com/GatosYPerrosPerdidosEnMoron/');
 INSERT INTO refugio (nombre_refugio , contrasenia, email, telefono, barrio, direccion, admin_refugio, img_refugio, encargado) VALUES ('Casa chica', '333', 'Sandro.p@gmail.com',  '4455 7788', 'Merlo', 'Rivadavia 40000', true,'https://res.cloudinary.com/dfwlfvd87/image/upload/v1529545526/LostFound/refugio/597a05a93a18d.jpg', 'Sandro Perez');
@@ -173,8 +173,8 @@ CREATE SEQUENCE public."Usuarios_id_seq"
     MAXVALUE 2147483647
     CACHE 1;
 
-ALTER SEQUENCE public."Usuarios_id_seq"
-    OWNER TO postgres;
+--ALTER SEQUENCE public."Usuarios_id_seq"
+--    OWNER TO postgres;
     
 -- Table: public.usuarios
 
@@ -198,8 +198,8 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.usuarios
-    OWNER to postgres;
+--ALTER TABLE public.usuarios
+ --   OWNER to postgres;
     
     
     
