@@ -32,7 +32,7 @@
 	<div id="wrapper">
 		<!-- start header -->
 		<div id="header">
-			<div id="menu">
+	<div id="menu">
 				<ul>
 					<li><a href="/">Inicio</a></li>
 					<li><a href="/refugio">Refugio</a></li>
@@ -40,9 +40,10 @@
 					<li><a href="/perdidos">Perdidos</a></li>
 					<li><a href="/zoonosis">Zoonosis</a></li>
 					<li><a href="/nosotros">Nosotros</a></li>
-					<li><a href="/iniciar_sesion">Sesion</a></li>
+					<li th:if="${estaLogeado} == true"><a th:href="  '/perfil/' +  ${nick} ">Perfil</a></li>
+					<li th:if="${estaLogeado} == false"><a href="/iniciar_sesion">Conectarse</a></li>
 			    </ul>
-			    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+			    <a th:if="${estaLogeado} == true" class="nav-link" data-toggle="modal" data-target="#exampleModal">
 			            <i class="fa fa-fw fa-sign-out"></i>Desconectar
 			    </a>
 			</div>
@@ -122,8 +123,8 @@
                   <!-- <td><a th:href="'/detalle_refugio/' + ${refugio.id}" th:text="${mascota.refugio}"></a></td>-->
                   
                   <td><a th:text="${mascota.encargado}"></a></td>
-                  <td><a>Modificar</a></td>
-                  <td><a>Eliminar</a></td>
+                  <td><a th:href="'/modificar-mascota/' + ${mascota.id}">Modificar</a></td>
+                  <td><a th:href="'/eliminar-mascota/' + ${mascota.id}">Eliminar</a></td>
                 </tr>
               </tbody>
             </table>
@@ -194,8 +195,8 @@
                   <td><label th:text="${refugio.email}"></label></td>
                   <td><a th:href="${refugio.facebook}">Facebook</a></td>
                   <td><label th:text="${refugio.admin_refugio}"></label></td>
-                  <td><a>Modifcar</a></td>
-                  <td><a>Eliminar</a></td>
+                  <td><a th:href="'/modificar-refugio/' + ${refugio.id}">Modifcar</a></td>
+                  <td><a th:href="'/eliminar-refugio/' + ${refugio.id}">Eliminar</a></td>
                 </tr>
               </tbody>
             </table>
@@ -247,8 +248,8 @@
                   <td><img class="refugio-img" th:src="${avisos.img_avisos}"></img></td>
                   <td><label th:text="${avisos.titulo}" id="fuente_negra"></label></td>
                   <td><label th:text="${avisos.detalles}"></label></td>
-                  <td><a>Modificar</a></td>
-                  <td><a>Eliminar</a></td>
+                  <td><a th:href="'/modificar-avisos/' + ${avisos.id}">Modificar</a></td>
+                  <td><a th:href="'/eliminar-avisos/' + ${avisos.id}">Eliminar</a></td>
                 </tr>
               </tbody>
             </table>
@@ -301,8 +302,8 @@
                   <td><label th:text="${perdidos.titulo}" id="fuente_negra"></label></td>
                   <td><label th:text="${perdidos.descripcion}"></label></td>
                   <td><label th:text="${perdidos.usuario}"></label></td>
-                  <td><a>Modificar</a></td>
-                  <td><a>Eliminar</a></td>
+                  <td><a th:href="'/modificar-perdidos/' + ${perdidos.id}">Modificar</a></td>
+                  <td><a th:href="'/eliminar-perdidos/' + ${perdidos.id}">Eliminar</a></td>
                 </tr>
               </tbody>
             </table>

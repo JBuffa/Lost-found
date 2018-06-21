@@ -22,49 +22,43 @@
       <div class="card-header">Registrar una cuenta</div>
       <div class="card-body">
         <form action="/insertar-usuario">
-          <div class="form-group">
+         <div class="form-group">
             <div class="form-row">
-                <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputName">Nombre</label>
-                <input class="form-control" id="exampleInputName" type="text" placeholder="Ingresar Nombre" th:value="${nombre}"></input>
-              </div>
-              <div class="col-md-6">
-                <label for="exampleInputLastName">Apellido</label>
-                <input class="form-control" id="exampleInputLastName type="text" placeholder="Ingresar Apellido" th:value="${contrasenia2}"></input>
-              </div>
-            </div>
               <div class="col-md-6">
                 <label for="exampleInputName">Nick</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar Nick" th:value="${nick}"></input>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar Nick" name="nick" th:value="${nick}"></input>
               </div>
               <div class="col-md-6">
                <label><a href="#" id="upload_widget_opener5">Cargar foto</a></label>
-                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Ingresar URL" th:value="${imagen_de_perfil}"></input>
+                <input class="form-control" id="imagen_usuario" type="text" aria-describedby="nameHelp" placeholder="Ingresar URL" name="img_perfil"  th:value="${img_perfil}"></input>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputName">Nombre</label>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar Nombre" name="nombre" th:value="${nombre}"></input>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputName">Apellido</label>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar Apellido" name="apellido" th:value="${apellido}"></input>
               </div>
             </div>
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Ingresar email" th:value="${correo}"></input>
+            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Ingresar email" name="correo" th:value="${correo}"></input>
           </div>
           <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Contraseña</label>
-                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Contraseña" th:value="${contrasenia}"></input>
-              </div>
-              <div class="col-md-6">
-                <label for="exampleConfirmPassword">Confirmar contraseña</label>
-                <input class="form-control" id="exampleConfirmPassword" type="password" placeholder="Confirmar Contraseña" th:value="${contrasenia2}"></input>
-              </div>
-            </div>
+             <label for="exampleInputPassword1">Contraseña</label>
+                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Contraseña" name="contrasenia"  th:value="${contrasenia}"></input>
           </div>
           <input type="submit" class="btn btn-primary btn-block" id="fuente_negra" value="Registrar"></input>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="/login">Iniciar Sesion</a>
-          <a class="d-block small" href="/forgot-password">¿Olvidaste tu contraseña?</a>
+          <a class="d-block small mt-3" href="/iniciar_sesion">Iniciar Sesion</a>
+          <!-- <a class="d-block small" href="/forgot-password">¿Olvidaste tu contraseña?</a>-->
         </div>
       </div>
     </div>

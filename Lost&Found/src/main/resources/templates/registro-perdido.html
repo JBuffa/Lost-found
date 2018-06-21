@@ -23,25 +23,24 @@
         <form action="/insertar-perdido">
           <div class="form-group">
               <label><a href="#" id="upload_widget_opener3">Cargar foto</a></label>
-            <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="O ingresar URL" th:value="${img_perdido}"></input>
+            <input class="form-control" id="imagen_perdido" type="text" aria-describedby="nameHelp" placeholder="O ingresar URL" name="img_perdido" th:value="${img_perdido}"></input>
           </div>
           <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputName">Titulo</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar titulo" th:value="${titulo}"></input>
-              </div>
-              <div class="col-md-6">
-                <label for="exampleInputLastName">Usuario</label>
-                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Ingreasar usuario" th:value="${usuario}"></input>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label id="upload_widget_opener">Descripción</label>
+            <label for="exampleInputName">Usuario</label>
             <br></br>
-            <textarea class="text-com coment-area" id="comentario-nuevo" th:text="${descripcion}" rows="8" cols="82" placeholder="Ingresar descripción"></textarea>
+            <input class="text-com coment-area" type="text" aria-describedby="nameHelp" placeholder="Ingresar usuario" name="usuario"  th:value="${usuario}"></input>
           </div>
+          <div class="form-group">
+            <label ifor="exampleInputName">Titulo</label>
+            <br></br>
+            <textarea class="text-com coment-area" id="comentario-nuevo" rows="3" cols="82" placeholder="Ingresar titulo" name="titulo"  th:value="${titulo}"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputName">Descripción</label>
+            <br></br>
+            <textarea class="text-com coment-area" id="comentario-nuevo" rows="8" cols="82" placeholder="Ingresar descripción" name="descripcion"  th:value="${descripcion}"></textarea>
+          </div>          
+
          <input type="submit" class="btn btn-primary btn-block" id="fuente_negra" value="Registrar"></input>
         </form>
  

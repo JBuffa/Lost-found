@@ -21,36 +21,36 @@
     <div class="card card-register mx-auto mt-5" id="fuente_negra">
       <div class="card-header">Registar un refugio</div>
       <div class="card-body">
-        <form>
+        <form action="/insertar-refugio">
           <div class="form-group">
               <label><a href="#" id="upload_widget_opener4">Cargar foto</a></label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="O ingresar URL" th:value="${img_refugio}"></input>
+            <input class="form-control" id="imagen_refugio" type="text" aria-describedby="nameHelp" placeholder="O ingresar URL" name="img_refugio" th:value="${img_refugio}"></input>
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputName">Nombre Refugio</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Nombre del refugio" th:value="${nombre_refugio}"></input>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Nombre del refugio" name="nombre_refugio" th:value="${nombre_refugio}"></input>
               </div>
               <div class="col-md-6">
                 <label for="exampleInputPassword">Contraseña</label>
-                <input class="form-control" id="exampleInputPassword" type="password" placeholder="Ingreasr contraseña" th:value="${contrasenia}"></input>
+                <input class="form-control" id="exampleInputPassword" type="password" placeholder="Ingresar contraseña" name="contrasenia" th:value="${contrasenia}"></input>
               </div>
             </div>
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Ingresar email" th:value="${correo}"></input>
+            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Ingresar email" name="email" th:value="${email}"></input>
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputName">Dirección</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar dirección" th:value="${direccion}"></input>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar dirección" name="direccion" th:value="${direccion}"></input>
               </div>
               <div class="col-md-6">
                 <label for="exampleInputLastName">Barrio</label>
-                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Ingresar barrio" th:value="${barrio}"></input>
+                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Ingresar barrio" name="barrio" th:value="${barrio}"></input>
               </div>
             </div>
           </div>
@@ -58,13 +58,17 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputLastName">Encargado</label>
-                <input class="form-control"  id="exampleInputLastName" type="text" placeholder="Ingresar Encargado" th:value="${encargado}"> </input>
+                <input class="form-control"  id="exampleInputLastName" type="text" placeholder="Ingresar Encargado" name="encargado" th:value="${encargado}"> </input>
               </div>
               <div class="col-md-6">
                 <label for="exampleInputLastName">Telefono</label>
-                <input class="form-control"  id="exampleInputLastName" type="text" placeholder="Ingresar telefono" th:value="${telefono}"></input>
+                <input class="form-control"  id="exampleInputLastName" type="text" placeholder="Ingresar telefono" name="telefono" th:value="${telefono}"></input>
               </div>
             </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Facebook</label>
+            <input class="form-control" id="exampleInputName" type="text" aria-describedby="emailHelp" placeholder="Ingresar URL" name="facebook" th:value="${facebook}"></input>
           </div>
           <input type="submit" class="btn btn-primary btn-block" id="fuente_negra" value="Registrar"></input>
         </form>

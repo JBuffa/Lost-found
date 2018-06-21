@@ -24,19 +24,20 @@
 
       <div class="row">
         <div class="col-sm-8">
-         <img class="perfil-img" th:src="${img_perfil}" alt=""></img>
-        <div class="col-sm-4">
-          <h1 class="mt-4">Detalle</h1>
-          
-            <h2><label th:text="${nick}" id="fuente_blanca"></label></h2>
-            <p>Nombre: <label th:text="${nombre}"></label></p>
-            <p>Apellido: <label th:text="${apellido}"></label></p>
-            <p></p>
-            <p>E: <a href="mailto:#"><label th:text="${correo}" id="fuente_blanca"></label></a></p>
-            
-        </div>
-      </div>
-      <!-- /.row -->
+        	 <img class="perfil-img" th:src="${img_perfil}" alt=""></img>
+         </div>
+	     <div class="col-sm-4">
+	          <h1 class="mt-4">Detalle</h1>
+	          
+	            <h2><label th:text="${nick}" id="fuente_blanca"></label></h2>
+	            <p>Nombre: <label th:text="${nombre}"></label></p>
+	            <p>Apellido: <label th:text="${apellido}"></label></p>
+	            <p></p>
+	            <p>E: <a href="mailto:#"><label th:text="${correo}" id="fuente_blanca"></label></a></p>
+	            
+	     </div>
+	      
+	      <!-- /.row -->
 
 		</div>
       </div>

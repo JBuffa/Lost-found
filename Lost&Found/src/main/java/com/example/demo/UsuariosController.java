@@ -70,40 +70,152 @@ public class UsuariosController {
 	// pagina inicial
 	
 	@GetMapping("/")
-	public String inicio(){	
+	public String inicio(HttpSession session,  Model template)throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		
+		if (logeado == null) {
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
+		
 		return "Home";
 	}	
 	
 	// contactarnos
 	
 	@GetMapping("/nosotros")
-	public String contacto(){	
+	public String contacto(HttpSession session,  Model template)throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		
+		if (logeado == null) {
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
+			
 		return "contact";
 	}
 	
 	
 	@GetMapping("/registrar_mascota")
-	public String registroMascota(){	
+	public String registroMascota(HttpSession session,  Model template)throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		
+		if (logeado == null) {
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
+			
 		return "registro-mascota";
 	}
 	
 	@GetMapping("/registrar_refugio")
-	public String registroRefugio(){	
+	public String registroRefugio(HttpSession session,  Model template)throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		
+		if (logeado == null) {
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
+			
 		return "registro-refugio";
 	}
 
 	@GetMapping("/registrar_perdido")
-	public String registroPerdido(){	
+	public String registroPerdido(HttpSession session,  Model template)throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		
+		if (logeado == null) {
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
+			
 		return "registro-perdido";
 	}
 	
 	@GetMapping("/registrar_usuario")
-	public String registroUsuario(){	
+	public String registroUsuario1(HttpSession session,  Model template)throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		
+		if (logeado == null) {
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
+			
 		return "registro-usuario";
 	}
 	
 	@GetMapping("/registrar_avisos")
-	public String registroAvisos(){	
+	public String registroAvisos(HttpSession session,  Model template)throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		
+		if (logeado == null) {
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
+		
 		return "registro-avisos";
 	}
 	
@@ -214,7 +326,45 @@ public class UsuariosController {
 	}
 
 	
-	//<---Lista de refugios--->
+	//<---Registro refugio--->
+	
+	
+
+	@GetMapping("/insertar-refugio")
+	public String insertarRefugio(HttpSession session, @RequestParam String img_refugio, @RequestParam String nombre_refugio, @RequestParam String contrasenia,
+			@RequestParam String email, @RequestParam String direccion, @RequestParam String barrio, @RequestParam String encargado, @RequestParam String telefono, 
+			@RequestParam String facebook, @RequestParam (value = "admin_refugio", required = false) boolean admin_refugio) throws SQLException {
+		
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+
+		
+		
+		PreparedStatement consulta = connection.prepareStatement(
+				"INSERT INTO refugio(img_refugio, nombre_refugio, contrasenia, email, direccion, barrio, encargado, telefono, facebook, admin_refugio) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ");
+		consulta.setString(1, img_refugio);
+		consulta.setString(2, nombre_refugio);
+		consulta.setString(3, contrasenia);
+		consulta.setString(4, email);
+		consulta.setString(5, direccion);
+		consulta.setString(6, barrio);
+		consulta.setString(7, encargado);
+		consulta.setString(8, telefono);
+		consulta.setString(9, facebook);
+		consulta.setBoolean(10, admin_refugio);
+		consulta.executeUpdate();
+
+		connection.close();
+
+		return "redirect:/refugio";
+	}
+	
+	
+	
+	//<---Lista de Mascotas--->
 	
 	
 	@GetMapping	("/adopcion")
@@ -228,14 +378,16 @@ public class UsuariosController {
 		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
 		
 		if (logeado == null) {
-		           template.addAttribute("estaLogeado", false);
-		       } else {
-		           template.addAttribute("estaLogeado", true);
-		       }
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
 		
 		
 		PreparedStatement consulta = 
-				connection.prepareStatement("SELECT * FROM mascota;");
+				connection.prepareStatement("SELECT * FROM mascota ORDER BY id DESC;");
 		
 		ResultSet resultado = consulta.executeQuery();
 		
@@ -264,6 +416,47 @@ public class UsuariosController {
 		return "adoption";
 	}
 	
+	
+	
+	
+	
+	//<---Registro Mascota--->
+	
+	
+
+	@GetMapping("/insertar-mascota")
+	public String insertarMascota(HttpSession session, @RequestParam String img_mascota, @RequestParam String nombre_mascota, @RequestParam String edad,
+			@RequestParam String raza, @RequestParam String clasificacion, @RequestParam String castrado, @RequestParam String vacuna, @RequestParam String refugio, 
+			@RequestParam String encargado, @RequestParam (value = "adoptado", required = false) boolean adoptado) throws SQLException {
+		
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+
+		
+		
+		PreparedStatement consulta = connection.prepareStatement(
+				"INSERT INTO mascota(img_mascota, nombre_mascota, edad, raza, clasificacion, castrado, vacuna, refugio, encargado, adoptado) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ");
+		consulta.setString(1, img_mascota);
+		consulta.setString(2, nombre_mascota);
+		consulta.setString(3, edad);
+		consulta.setString(4, raza);
+		consulta.setString(5, clasificacion);
+		consulta.setString(6, castrado);
+		consulta.setString(7, vacuna);
+		consulta.setString(8, refugio);
+		consulta.setString(9, encargado);
+		consulta.setBoolean(10, adoptado);
+		consulta.executeUpdate();
+
+		connection.close();
+
+		return "redirect:/adopcion";
+	}
+	
+	
 	// muestra una mascota en detalle
 		@GetMapping("/detalle_mascota/{id}")
 		public String detalleMascota(HttpSession session, Model template, @PathVariable int id) throws SQLException {
@@ -276,10 +469,12 @@ public class UsuariosController {
 			Usuario logeado = UsuariosHelper.usuarioLogeado(session, connection);
 			
 			if (logeado == null) {
-			           template.addAttribute("estaLogeado", false);
-			       } else {
-			           template.addAttribute("estaLogeado", true);
-			       }
+	            template.addAttribute("estaLogeado", false);
+	        } else {
+	            template.addAttribute("estaLogeado", true);
+	            String nick = logeado.getNick();
+	            template.addAttribute("nick", nick);  
+			}
 		
 			
 			
@@ -331,10 +526,12 @@ public class UsuariosController {
 			Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
 
 			if (logeado == null) {
-		           template.addAttribute("estaLogeado", false);
-		       } else {
-		           template.addAttribute("estaLogeado", true);
-		       }
+	            template.addAttribute("estaLogeado", false);
+	        } else {
+	            template.addAttribute("estaLogeado", true);
+	            String nick = logeado.getNick();
+	            template.addAttribute("nick", nick);  
+			}
 			
 			connection.close();
 			
@@ -342,7 +539,7 @@ public class UsuariosController {
 		}	
 
 	@GetMapping("/insertar-usuario")
-	public String insertUsuario(@RequestParam String nick,@RequestParam String img_perfil,
+	public String insertUsuario(HttpSession session, @RequestParam String nick,@RequestParam String img_perfil,
 			 @RequestParam String correo, @RequestParam String contrasenia, @RequestParam String nombre, @RequestParam String apellido,
 			 @RequestParam (value = "administrador", required = false) boolean administrador) throws SQLException {
 		
@@ -350,6 +547,7 @@ public class UsuariosController {
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 				env.getProperty("spring.datasource.password"));
+		
 		
 		PreparedStatement consulta = connection.prepareStatement(
 				"INSERT INTO usuarios(nick, img_perfil, correo, contrasenia, administrador, nombre, apellido) VALUES( ?, ?, ?, ?, ?, ?, ?); ");
@@ -375,6 +573,8 @@ public class UsuariosController {
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 				env.getProperty("spring.datasource.password"));
 		
+		
+		
 		boolean sePudo = UsuariosHelper.intentarLoguearse(session, nick, contrasenia, connection);
 			
 			if (sePudo){
@@ -390,11 +590,20 @@ public class UsuariosController {
 	
 	// muestra un perfil usuario en detalle
 		@GetMapping("/perfil/{nick}")
-		public String detalleRefugio(Model template, @PathVariable String nick) throws SQLException {
+		public String detallePerfil(HttpSession session, Model template, @PathVariable String nick) throws SQLException {
 			
 			Connection connection;
 			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 					env.getProperty("spring.datasource.password"));
+			
+			Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+			
+			if (logeado == null) {
+	              template.addAttribute("estaLogeado", false);
+	          } else {
+	              template.addAttribute("estaLogeado", true);
+			}
+			
 			
 			PreparedStatement consulta = 
 					connection.prepareStatement("SELECT * FROM usuarios WHERE nick = ?;");
@@ -427,32 +636,86 @@ public class UsuariosController {
 			return "perfil";
 		}
 
-	
+		// muestra un perfil usuario en detalle
+		@GetMapping("/perfil")
+		public String detallePerfil2(HttpSession session, Model template, @PathVariable String nick) throws SQLException {
+			
+			Connection connection;
+			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+					env.getProperty("spring.datasource.password"));
+			
+			Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+			
+			if (logeado == null) {
+	            template.addAttribute("estaLogeado", false);
+	        } else {
+	            template.addAttribute("estaLogeado", true);
+	            template.addAttribute("nick", nick);  
+			}
+			
+			
+			PreparedStatement consulta = 
+					connection.prepareStatement("SELECT * FROM usuarios WHERE nick = ?;");
+			
+			consulta.setString(1, nick);
+
+			ResultSet resultado = consulta.executeQuery();
+			
+			if ( resultado.next() ) {
+				String nick1 = resultado.getString("nick");
+				String nombre = resultado.getString("nombre");
+				String apellido = resultado.getString("apellido");
+				String administrador = resultado.getString("administrador");
+				String contrasenia = resultado.getString("contrasenia");
+				String correo = resultado.getString("correo");
+				String codigo = resultado.getString("codigo");
+				String img_perfil = resultado.getString("img_perfil");
+				
+				template.addAttribute("nick", nick1);
+				template.addAttribute("nombre", nombre);
+				template.addAttribute("apellido", apellido);
+				template.addAttribute("administrador", administrador);
+				template.addAttribute("contrasenia", contrasenia);
+				template.addAttribute("correo", correo);
+				template.addAttribute("codigo", codigo);
+				template.addAttribute("img_perfil", img_perfil);
+
+			}
+			
+			return "perfil";
+		}
+		
+		
+		
+		
 	//<---Registro perdido--->
 	
 	
 
 	@GetMapping("/insertar-perdido")
-	public String insertUsuario(@RequestParam String img_perdido, @RequestParam String titulo, @RequestParam String descripcion,
-			@RequestParam String usuario, @RequestParam (value = "encontrado", required = false) boolean encontrado) throws SQLException {
+	public String insertUsuario(HttpSession session, @RequestParam String img_perdido, @RequestParam String usuario, @RequestParam String titulo, 
+			@RequestParam String descripcion, @RequestParam (value = "encontrado", required = false) boolean encontrado) throws SQLException {
 		
 		
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 				env.getProperty("spring.datasource.password"));
 		
+
+		
+		
 		PreparedStatement consulta = connection.prepareStatement(
-				"INSERT INTO perdidos(img_perdido, titulo, descripcion, usuario, encontrado) VALUES( ?, ?, ?, ?, ?); ");
+				"INSERT INTO perdidos(img_perdido, usuario, titulo, descripcion, encontrado) VALUES( ?, ?, ?, ?, ?); ");
 		consulta.setString(1, img_perdido);
-		consulta.setString(2, titulo);
-		consulta.setString(3, descripcion);
-		consulta.setString(4, usuario);
+		consulta.setString(2, usuario);
+		consulta.setString(3, titulo);
+		consulta.setString(4, descripcion);
 		consulta.setBoolean(5, encontrado);
 		consulta.executeUpdate();
 
 		connection.close();
 
-		return "redirect:/registro-perdido";
+		return "redirect:/perdidos";
 	}
 	
 	// muestra el listado completo de mascotas perdidas
@@ -465,8 +728,20 @@ public class UsuariosController {
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 				env.getProperty("spring.datasource.password"));
 		
+		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		if (logeado == null) {
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
+		
+		
 		PreparedStatement consulta = 
-				connection.prepareStatement("SELECT * FROM perdidos;");
+				connection.prepareStatement("SELECT * FROM perdidos ORDER BY id DESC;");
 		
 		ResultSet resultado = consulta.executeQuery();
 		
@@ -491,31 +766,7 @@ public class UsuariosController {
 	
 	
 	
-	//<---Registro avisos--->
-	
-	
 
-	@GetMapping("/insertar-avisos")
-	public String insertarAviso(@RequestParam String img_avisos, @RequestParam String titulo, 
-			@RequestParam String detalles) throws SQLException {
-		
-		
-		Connection connection;
-		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
-				env.getProperty("spring.datasource.password"));
-		
-		PreparedStatement consulta = connection.prepareStatement(
-				"INSERT INTO avisos(img_avisos, titulo, detalles) VALUES( ?, ?, ?); ");
-		consulta.setString(1, img_avisos);
-		consulta.setString(2, titulo);
-		consulta.setString(3, detalles);
-		
-		consulta.executeUpdate();
-
-		connection.close();
-
-		return "redirect:/announcements";
-	}
 	
 	
 	// muestra el listado completo de avisos
@@ -527,8 +778,19 @@ public class UsuariosController {
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
 				env.getProperty("spring.datasource.password"));
 		
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		if (logeado == null) {
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
+		
+		
 		PreparedStatement consulta = 
-				connection.prepareStatement("SELECT * FROM avisos;");
+				connection.prepareStatement("SELECT * FROM avisos ORDER BY id DESC;");
 		
 		ResultSet resultado = consulta.executeQuery();
 		
@@ -549,6 +811,34 @@ public class UsuariosController {
 		return "announcements";
 	}
 	
+	//<---Registro avisos--->
+	
+	
+
+	@GetMapping("/insertar-avisos")
+	public String insertarAviso(HttpSession session, @RequestParam String img_avisos, @RequestParam String titulo, 
+			@RequestParam String detalles) throws SQLException {
+		
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+		
+		PreparedStatement consulta = connection.prepareStatement(
+				"INSERT INTO avisos(img_avisos, titulo, detalles) VALUES( ?, ?, ?); ");
+		consulta.setString(1, img_avisos);
+		consulta.setString(2, titulo);
+		consulta.setString(3, detalles);
+		
+		consulta.executeUpdate();
+
+		connection.close();
+
+		return "redirect:/zoonosis";
+	}
+	
+	
 	
 	// desconecta session
 	@GetMapping("/desconectar")
@@ -567,7 +857,7 @@ public class UsuariosController {
 		 }		
 	
 	
-	
+	//<---Administrador--->
 	
 	
 	
@@ -581,10 +871,12 @@ public class UsuariosController {
 		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
 		
 		if (logeado == null) {
-	           template.addAttribute("estaLogeado", false);
-	       } else {
-	           template.addAttribute("estaLogeado", true);
-	       }
+            template.addAttribute("estaLogeado", false);
+        } else {
+            template.addAttribute("estaLogeado", true);
+            String nick = logeado.getNick();
+            template.addAttribute("nick", nick);  
+		}
 		
 		if (logeado == null || logeado.isAdministrador() == false) {
 			return "redirect:/iniciar_sesion";
@@ -694,7 +986,78 @@ public class UsuariosController {
 		return "administrar";
 	}
 	
+	//<---Administrador: Eliminar datos--->
 
+	
+	@GetMapping("/eliminar-refugio/{id}")
+	public String eliminarRefugio(Model template, @PathVariable int id) throws SQLException {
+	
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+
+		PreparedStatement consulta = connection.prepareStatement("DELETE FROM refugio WHERE id = ?;");
+
+		consulta.setInt(1, id);
+
+		consulta.executeUpdate();
+
+		connection.close();
+		return "redirect:/administrar";
+	}
+	
+	@GetMapping("/eliminar-mascota/{id}")
+	public String eliminarMascota(Model template, @PathVariable int id) throws SQLException {
+	
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+
+		PreparedStatement consulta = connection.prepareStatement("DELETE FROM mascota WHERE id = ?;");
+
+		consulta.setInt(1, id);
+
+		consulta.executeUpdate();
+
+		connection.close();
+		return "redirect:/administrar";
+	}
+	
+	@GetMapping("/eliminar-perdidos/{id}")
+	public String eliminarPerdidos(Model template, @PathVariable int id) throws SQLException {
+	
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+
+		PreparedStatement consulta = connection.prepareStatement("DELETE FROM perdidos WHERE id = ?;");
+
+		consulta.setInt(1, id);
+
+		consulta.executeUpdate();
+
+		connection.close();
+		return "redirect:/administrar";
+	}
+	
+	@GetMapping("/eliminar-avisos/{id}")
+	public String eliminarAvisos(Model template, @PathVariable int id) throws SQLException {
+	
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+
+		PreparedStatement consulta = connection.prepareStatement("DELETE FROM avisos WHERE id = ?;");
+
+		consulta.setInt(1, id);
+
+		consulta.executeUpdate();
+
+		connection.close();
+		return "redirect:/administrar";
+	}
+	
+	
 }
 
 

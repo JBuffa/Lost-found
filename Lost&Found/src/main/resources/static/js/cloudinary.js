@@ -64,7 +64,7 @@ $(document).ready(function() {
     }, function(error, result) {
         
             var url = result[0].secure_url ;
-            $("form").find("#imagen_perdidos").val(url);    
+            $("form").find("#imagen_perdido").val(url);    
         
        
         });

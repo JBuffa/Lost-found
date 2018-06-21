@@ -23,21 +23,21 @@
       <div class="card-body">
         <form action="/insertar-avisos">
           <div class="form-group">
-              <label><a href="#" id="upload_widget_opener3">Cargar foto</a></label>
-            <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="O ingresar URL" th:value="${img_avisos}"></input>
+              <label><a href="#" id="upload_widget_opener">Cargar foto</a></label>
+            <input class="form-control" id="imagen_avisos" type="text" aria-describedby="nameHelp" placeholder="O ingresar URL" name="img_avisos" th:value="${img_avisos}"></input>
           </div>
           <div class="form-group">
             <div class="form-row">
                 <label for="exampleInputName">Titulo</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar titulo" th:value="${titulo}"></input>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Ingresar titulo" name="titulo" th:value="${titulo}"></input>
             </div>
           </div>
           <div class="form-group">
-            <label id="upload_widget_opener">Detalles</label>
+            <label id="exampleInputName">Detalles</label>
             <br></br>
-            <textarea class="text-com coment-area" id="comentario-nuevo" th:text="${detalles}" rows="8" cols="82" placeholder="Ingresar detalles"></textarea>
+            <textarea class="text-com coment-area" id="comentario-nuevo" rows="8" cols="82" placeholder="Ingresar detalles" name="detalles" th:value="${detalles}" ></textarea>
           </div>
-          <a class="btn btn-primary btn-block" id="fuente_negra" href="/adoption">Registrar</a>
+          <input type="submit" class="btn btn-primary btn-block" id="fuente_negra" value="Registrar"></input>
         </form>
  
       </div>

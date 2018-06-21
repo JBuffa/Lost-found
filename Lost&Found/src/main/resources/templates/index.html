@@ -40,8 +40,8 @@
 					<li><a href="/perdidos">Perdidos</a></li>
 					<li><a href="/zoonosis">Zoonosis</a></li>
 					<li><a href="/nosotros">Nosotros</a></li>
-					<li th:if="${estaLogeado} == true"><a href="/logear-usuario">Perfil</a></li>
-					<li th:if="${estaLogeado} == false"><a href="/iniciar_sesion">Conectarse</a></li>
+					<li th:if="${estaLogeado} == true"><a th:href="  '/perfil/' +  ${nick} ">Perfil</a></li>
+					<li th:if="${estaLogeado} == false"><a href="/iniciar_sesion">Conectarse/Registrarse</a></li>
 			    </ul>
 			    <a th:if="${estaLogeado} == true" class="nav-link" data-toggle="modal" data-target="#exampleModal">
 			            <i class="fa fa-fw fa-sign-out"></i>Desconectar
