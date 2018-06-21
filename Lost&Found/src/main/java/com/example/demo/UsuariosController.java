@@ -576,7 +576,7 @@ public class UsuariosController {
 		consulta.executeUpdate();
 
 
-		return "redirect:/";
+		return "redirect:/iniciar_sesion";
 	}
 	
 	
