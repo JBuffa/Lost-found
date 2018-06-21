@@ -187,7 +187,7 @@ CREATE TABLE public.usuarios
     administrador boolean,
     codigo text COLLATE pg_catalog."default",
     correo text COLLATE pg_catalog."default" NOT NULL,
-    imagen_de_perfil text COLLATE pg_catalog."default",
+    img_perfil text COLLATE pg_catalog."default",
     nick text COLLATE pg_catalog."default",
     nombre text COLLATE pg_catalog."default",
     apellido text COLLATE pg_catalog."default",
@@ -200,7 +200,15 @@ TABLESPACE pg_default;
 
 --ALTER TABLE public.usuarios
  --   OWNER to postgres;
-    
+
+INSERT INTO usuarios (nombre, apellido, contrasenia, nick, correo, img_perfil, administrador) VALUES ('Juan', 'Buffa','4627', 'NekoBaan', 'juanbuffa28@gmail.com', 'https://res.cloudinary.com/dfwlfvd87/image/upload/v1529589048/LostFound/usuario/77262e90c067434b73e04ba08fc64791.jpg', true);
+
+INSERT INTO usuarios (nombre, apellido, contrasenia, nick, correo, img_perfil, administrador) VALUES ('Pedro', 'Farias','asd', 'PMole01', 'pepe_2014@gmail.com', 'https://res.cloudinary.com/dfwlfvd87/image/upload/v1529589299/LostFound/usuario/906ea0de0b32118363f54a68126c5707.jpg', false);
+INSERT INTO usuarios (nombre, apellido, contrasenia, nick, correo, img_perfil, administrador) VALUES ('Samantha','Torres', 'zxc', 'Sans356', 'samantha_2014@gmail.com', 'https://res.cloudinary.com/dfwlfvd87/image/upload/v1529589298/LostFound/usuario/30440790_606950566312334_2806910648632475648_n.jpg', false);
+INSERT INTO usuarios (nombre, apellido, contrasenia, nick, correo, img_perfil, administrador) VALUES ('Susana', 'Salas','3243', 'Buffalito', 'susana_2014@gmail.com', 'https://res.cloudinary.com/dfwlfvd87/image/upload/v1529589299/LostFound/usuario/c8e067c07882a7cef7592a32582db657.jpg', false);
+INSERT INTO usuarios (nombre, apellido, contrasenia, nick, correo, img_perfil, administrador) VALUES ('Ignacio','Domingo', '25568', 'TC2000', 'ignacio_2014@gmail.com', 'https://res.cloudinary.com/dfwlfvd87/image/upload/v1529589412/LostFound/usuario/Screenshot_20180104-203146.jpg', false);
+
+
     
     
     -- COMENTARIO

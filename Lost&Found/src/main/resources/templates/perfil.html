@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorator="index">
+
+	<head>
+	  <meta charset="utf-8"></meta>
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+	  <meta name="description" content=""></meta>
+	  <meta name="author" content=""></meta>
+	  <title>Lost&amp;Found</title>
+	  <!-- Bootstrap core CSS-->
+	  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+	  <!-- Custom fonts for this template-->
+	  <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
+	  <!-- Custom styles for this template-->
+	  <link href="/css/sb-admin.css" rel="stylesheet"></link>
+	</head>
+	
+	<body class="fixed-nav sticky-footer bg-dark" id="page-top" layout:fragment="contenido-web">
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+        <div class="col-sm-8">
+         <img class="perfil-img" th:src="${img_refugio}" alt=""></img>
+        <div class="col-sm-4">
+          <h1 class="mt-4">Detalle</h1>
+          
+            <h2><label th:text="${nick}" id="fuente_blanca"></label></h2>
+            <p>Nombre: <label th:text="${nombre}"></label></p>
+            <p>Apellido: <label th:text="${apellido}"></label></p>
+            <p></p>
+            <p>E: <a href="mailto:#"><label th:text="${correo}" id="fuente_blanca"></label></a></p>
+            
+        </div>
+      </div>
+      <!-- /.row -->
+
+
+      </div>
+	</body>
+
+</html>

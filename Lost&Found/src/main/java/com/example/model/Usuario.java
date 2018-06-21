@@ -8,10 +8,10 @@ public class Usuario {
 	private String contrasenia;
 	private String codigo;
 	private String correo;
-	private String imagen_de_perfil;
+	private String img_perfil;
 	private boolean administrador;
 	
-	public Usuario(int id, String nombre, String apellido, boolean administrador, String contrasenia, String nick, String codigo, String correo, String imagen_de_perfil) {
+	public Usuario(int id, String nombre, String apellido, boolean administrador, String contrasenia, String nick, String codigo, String correo, String img_perfil) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -20,7 +20,7 @@ public class Usuario {
 		this.administrador = administrador;
 		this.codigo = codigo;
 		this.correo = correo;
-		this.imagen_de_perfil = imagen_de_perfil;
+		this.img_perfil = img_perfil;
 	}
 
 	public int getId() {
@@ -63,12 +63,12 @@ public class Usuario {
 		this.correo = correo;
 	}
 
-	public String getImagen_de_perfil() {
-		return imagen_de_perfil;
+	public String getImg_perfil() {
+		return img_perfil;
 	}
 
-	public void setImagen_de_perfil(String imagen_de_perfil) {
-		this.imagen_de_perfil = imagen_de_perfil;
+	public void setImg_perfil(String img_perfil) {
+		this.img_perfil = img_perfil;
 	}
 
 	public String getNombre() {

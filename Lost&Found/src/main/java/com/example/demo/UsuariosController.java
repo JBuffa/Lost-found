@@ -22,6 +22,7 @@ import com.example.model.Avisos;
 import com.example.model.Mascota;
 import com.example.model.Perdidos;
 import com.example.model.Refugio;
+import com.example.model.Usuario;
 
 @Controller
 public class UsuariosController {
@@ -50,8 +51,8 @@ public class UsuariosController {
 	}
 	
 	@PostMapping("/procesar-registro")
-		public String procesarLogin( HttpSession session, @RequestParam String nick, @RequestParam String contrasenia) throws SQLException {
-		boolean sePudo = UsuariosHelper.intentarLoguearse(session, nick, contrasenia);
+		public String procesarLogin( HttpSession session, @RequestParam String correo, @RequestParam String contrasenia) throws SQLException {
+		boolean sePudo = UsuariosHelper.intentarLoguearse(session, correo, contrasenia, null);
 		
 		if (sePudo){
 			return "redirect:/";
@@ -239,43 +240,6 @@ public class UsuariosController {
 			
 		return "adoption";
 	}
-
-	@GetMapping	("/adopcion2")
-	public String mascota2(HttpSession session, Model template) throws SQLException {
-		
-		Connection connection;
-		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
-				env.getProperty("spring.datasource.password"));
-		
-		PreparedStatement consulta = 
-				connection.prepareStatement("SELECT * FROM mascota;");
-		
-		ResultSet resultado = consulta.executeQuery();
-		
-		ArrayList<Mascota> listadoAdopcion = new ArrayList<Mascota>();
-		
-		while ( resultado.next() ) {
-			int id = resultado.getInt("id");
-			String img_mascota = resultado.getString("img_mascota");
-			String nombre_mascota = resultado.getString("nombre_mascota");
-			String edad = resultado.getString("edad");
-			String clasificacion = resultado.getString("clasificacion");
-			String raza = resultado.getString("raza");
-			String vacuna = resultado.getString("vacuna");
-			String castrado = resultado.getString("castrado");
-			String refugio = resultado.getString("refugio");
-			String encargado = resultado.getString("encargado");
-			String adoptante = resultado.getString("adoptante");
-			Boolean adoptado = resultado.getBoolean("adoptado");
-			
-			Mascota x = new Mascota(id, img_mascota, nombre_mascota, edad, clasificacion, raza, vacuna, castrado, refugio, encargado, adoptante, adoptado);
-			listadoAdopcion.add(x);
-		}
-		
-		template.addAttribute("listadoAdopcion", listadoAdopcion);
-			
-		return "adoption2";
-	}
 	
 	// muestra una mascota en detalle
 		@GetMapping("/detalle_mascota/{id}")
@@ -324,7 +288,19 @@ public class UsuariosController {
 	
 	//<---Registro usuario--->
 	
-	
+		@GetMapping("/registro-usuario")
+		public String registroUsuario(HttpSession session,Model template) throws SQLException {
+			Connection connection;
+			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+					env.getProperty("spring.datasource.password"));
+			Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+			
+			UsuariosHelper.checkearHeader(logeado, template);
+			
+			connection.close();
+			
+			return "registro-usuario";
+		}	
 
 	@GetMapping("/insertar-usuario")
 	public String insertUsuario(@RequestParam String nick,@RequestParam String imagen_de_perfil,
@@ -352,6 +328,66 @@ public class UsuariosController {
 		return "redirect:/registro-usuario";
 	}
 	
+	
+	@PostMapping("/logear-usuario")
+	public String logearUsuario(HttpSession session, Model template, @RequestParam String correo, @RequestParam String contrasenia) throws SQLException {
+	
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		
+		boolean sePudo = UsuariosHelper.intentarLoguearse(session, correo, contrasenia, connection);
+			
+			if (sePudo){
+				Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+				connection.close();
+				return "redirect:/perfil/" + logeado.getNick();
+			} else {
+				connection.close();
+				return "redirect:/iniciar_sesion";	
+			}
+		}
+	
+	
+	// muestra un perfil usuario en detalle
+		@GetMapping("/perfil/{nick}")
+		public String detalleRefugio(Model template, @PathVariable String nick) throws SQLException {
+			
+			Connection connection;
+			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+					env.getProperty("spring.datasource.password"));
+			
+			PreparedStatement consulta = 
+					connection.prepareStatement("SELECT * FROM usuarios WHERE nick = ?;");
+			
+			consulta.setString(1, nick);
+
+			ResultSet resultado = consulta.executeQuery();
+			
+			if ( resultado.next() ) {
+				String nick1 = resultado.getString("nick");
+				String nombre = resultado.getString("nombre");
+				String apellido = resultado.getString("apellido");
+				String administrador = resultado.getString("administrador");
+				String contrasenia = resultado.getString("contrasenia");
+				String correo = resultado.getString("correo");
+				String codigo = resultado.getString("codigo");
+				String img_perfil = resultado.getString("img_perfil");
+				
+				template.addAttribute("nick", nick1);
+				template.addAttribute("nombre", nombre);
+				template.addAttribute("apellido", apellido);
+				template.addAttribute("administrador", administrador);
+				template.addAttribute("contrasenia", contrasenia);
+				template.addAttribute("correo", correo);
+				template.addAttribute("codigo", codigo);
+				template.addAttribute("img_perfil", img_perfil);
+
+			}
+			
+			return "perfil";
+		}
+
 	
 	//<---Registro perdido--->
 	
@@ -476,6 +512,130 @@ public class UsuariosController {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("/administrar")
+	public String administrar(HttpSession session,Model template) throws SQLException {
+
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+		
+		if (logeado == null || logeado.isAdministrador() == false) {
+			return "redirect:/iniciar_sesion";
+		}
+		
+		UsuariosHelper.checkearHeader(logeado, template);
+		
+		PreparedStatement consultaMascota = connection.prepareStatement("SELECT * FROM Mascota ORDER BY id ASC;");
+
+		ResultSet resultadoMascota = consultaMascota.executeQuery();
+
+		ArrayList<Mascota> listadoMascota = new ArrayList<Mascota>();
+		
+		while ( resultadoMascota.next() ) {
+			int id = resultadoMascota.getInt("id");
+			String img_mascota = resultadoMascota.getString("img_mascota");
+			String nombre_mascota = resultadoMascota.getString("nombre_mascota");
+			String edad = resultadoMascota.getString("edad");
+			String clasificacion = resultadoMascota.getString("clasificacion");
+			String raza = resultadoMascota.getString("raza");
+			String vacuna = resultadoMascota.getString("vacuna");
+			String castrado = resultadoMascota.getString("castrado");
+			String refugio = resultadoMascota.getString("refugio");
+			String encargado = resultadoMascota.getString("encargado");
+			String adoptante = resultadoMascota.getString("adoptante");
+			Boolean adoptado = resultadoMascota.getBoolean("adoptado");
+			
+			Mascota x = new Mascota(id, img_mascota, nombre_mascota, edad, clasificacion, raza, vacuna, castrado, refugio, encargado, adoptante, adoptado);
+			listadoMascota.add(x);	
+		}
+
+		template.addAttribute("listadoMascota", listadoMascota);
+		
+		
+		PreparedStatement consultaRefugio = connection.prepareStatement("SELECT * FROM refugio ORDER BY id ASC;");
+
+		ResultSet resultadoRefugio = consultaRefugio.executeQuery();
+
+		ArrayList<Refugio> listadoRefugio= new ArrayList<Refugio>();
+		
+		while ( resultadoRefugio.next() ) {
+			int id = resultadoRefugio.getInt("id");
+			String img_refugio = resultadoRefugio.getString("img_refugio");
+			String nombre_refugio = resultadoRefugio.getString("nombre_refugio");
+			String barrio = resultadoRefugio.getString("barrio");
+			String encargado = resultadoRefugio.getString("encargado");
+			String contrasenia = resultadoRefugio.getString("contrasenia");
+			String email = resultadoRefugio.getString("email");
+			String telefono = resultadoRefugio.getString("telefono");
+			String direccion = resultadoRefugio.getString("direccion");
+			String codigo = resultadoRefugio.getString("codigo");
+			String facebook = resultadoRefugio.getString("facebook");
+			Boolean admin_refugio = resultadoRefugio.getBoolean("admin_refugio");
+			
+			Refugio z = new Refugio(id, img_refugio, nombre_refugio, barrio, encargado, contrasenia, email, telefono, direccion, codigo, facebook, admin_refugio);
+
+			listadoRefugio.add(z);	
+		}
+
+		template.addAttribute("listadoRefugio", listadoRefugio);
+		
+		
+		PreparedStatement consultaUsuarios = connection.prepareStatement("SELECT * FROM perdidos ORDER BY id ASC;");
+
+		ResultSet resultadoPerdidos = consultaUsuarios.executeQuery();
+
+		ArrayList<Perdidos> listadoPerdidos = new ArrayList<Perdidos>();
+		
+		while ( resultadoPerdidos.next() ) {
+			int id = resultadoPerdidos.getInt("id");
+			String img_perdido = resultadoPerdidos.getString("img_perdido");
+			String titulo = resultadoPerdidos.getString("titulo");
+			String descripcion = resultadoPerdidos.getString("descripcion");
+			String usuario = resultadoPerdidos.getString("usuario");
+			Boolean encontrado = resultadoPerdidos.getBoolean("encontrado");
+			
+			Perdidos y = new Perdidos(id, img_perdido, titulo, descripcion, usuario, encontrado);
+			
+			listadoPerdidos.add(y);
+		}
+		
+		template.addAttribute("listadoPerdidos", listadoPerdidos);
+		
+		
+		PreparedStatement consulta = 
+				connection.prepareStatement("SELECT * FROM avisos;");
+		
+		ResultSet resultadoAvisos = consulta.executeQuery();
+		
+		ArrayList<Avisos> listadoAvisos = new ArrayList<Avisos>();
+		
+		while ( resultadoAvisos.next() ) {
+			int id = resultadoAvisos.getInt("id");
+			String img_avisos = resultadoAvisos.getString("img_avisos");
+			String titulo = resultadoAvisos.getString("titulo");
+			String detalles = resultadoAvisos.getString("detalles");
+			
+			Avisos w = new Avisos( id, img_avisos, titulo, detalles);
+			
+			listadoAvisos.add(w);
+		}
+		
+		template.addAttribute("listadoAvisos", listadoAvisos);
+		
+		connection.close();
+		
+		return "administrar";
+	}
+	
+
 }
 
 
