@@ -78,7 +78,7 @@ public class UsuariosController {
 	
 	@GetMapping("/")
 	public String inicio(){	
-		return "home";
+		return "Home";
 	}	
 	
 	// contactarnos
