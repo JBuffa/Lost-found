@@ -57,8 +57,8 @@ public class UsuariosHelper {
 				int id = resultado.getInt("id");
 				session.setAttribute("id", id);
 				Usuario logueado = new Usuario (resultado.getInt("id"), resultado.getString("correo"), resultado.getString("contrasenia"),
-						resultado.getBoolean("administrador"), resultado.getString("img_perfil"), resultado.getString("nick"), 
-						resultado.getString("nombre"), resultado.getString("apellido"), resultado.getString("codigo"));
+						resultado.getString("nombre"), resultado.getString("img_perfil"), resultado.getString("nick"), 
+						resultado.getBoolean("administrador"), resultado.getString("apellido"), resultado.getString("codigo"));
 				return logueado;
 			
 			} else {

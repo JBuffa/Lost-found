@@ -312,7 +312,71 @@
      	</div>
       </div> 
      <!-- /.container-fluid--> 
-         
+
+
+    
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/" id="fuente_negra">Usuarios</a>
+        </li>
+        <li class="breadcrumb-item active">Tabla</li>
+      </ol>
+      <a class="btn btn-primary" id="fuente_negra" href="/registro-usuario">Ingresar Usuario</a>
+      <p></p>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3" id="fuente_negra">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Lista de Usuarios</div>
+        <div class="card-body" >
+          <div class="table-responsive" >
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Foto</th>
+                  <th>Nick</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Correo</th>
+                  <th>Administrador</th>
+                  <th>Modifcar</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Foto</th>
+                  <th>Nick</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Correo</th>
+                  <th>Administrador</th>
+                  <th>Modifcar</th>
+                  <th>Eliminar</th>
+                </tr>
+              </tfoot>
+              <tbody th:each="usuarios:${listadoUsuario}">
+                <tr>
+                  <td><img class="lista_perfil" th:href="'/perfil/' + ${usuarios.nick}" th:src="${usuarios.img_perfil}"></img></td>
+                  <td><label th:href="'/perfil/' + ${usuarios.nick}" th:text="${usuarios.nick}" id="fuente_negra"></label></td>
+                  <td><label th:text="${usuarios.nombre}"></label></td>
+                  <td><label th:text="${usuarios.apellido}"></label></td>
+                  <td><label th:text="${usuarios.correo}"></label></td>
+                  <td><label th:text="${usuarios.administrador}"></label></td>
+                  <td><a th:href="'/modificar-usuarios/' + ${usuarios.id}">Modificar</a></td>
+                  <td><a th:href="'/eliminar-usuarios/' + ${usuarios.id}">Eliminar</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+       	 </div>
+     	</div>
+      </div> 
+     <!-- /.container-fluid--> 
+
+
+     
 </div> 
     
     

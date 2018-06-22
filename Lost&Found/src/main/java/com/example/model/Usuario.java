@@ -11,16 +11,17 @@ public class Usuario {
 	private String img_perfil;
 	private boolean administrador;
 	
-	public Usuario(int id, String nombre, String apellido, boolean administrador, String contrasenia, String nick, String codigo, String correo, String img_perfil) {
+	public Usuario(int id, String img_perfil, String nick, String nombre, String apellido, String correo, boolean administrador, String contrasenia,  String codigo) {
 		this.id = id;
+		this.img_perfil = img_perfil;
+		this.nick = nick;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.nick = nick;
+		this.correo = correo;
 		this.contrasenia = contrasenia;
 		this.administrador = administrador;
 		this.codigo = codigo;
-		this.correo = correo;
-		this.img_perfil = img_perfil;
+		
 	}
 
 	public int getId() {

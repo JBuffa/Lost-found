@@ -924,6 +924,8 @@ public class UsuariosController {
 		template.addAttribute("listadoMascota", listadoMascota);
 		
 		
+		
+		
 		PreparedStatement consultaRefugio = connection.prepareStatement("SELECT * FROM refugio ORDER BY id ASC;");
 
 		ResultSet resultadoRefugio = consultaRefugio.executeQuery();
@@ -953,9 +955,11 @@ public class UsuariosController {
 		template.addAttribute("listadoRefugio", listadoRefugio);
 		
 		
-		PreparedStatement consultaUsuarios = connection.prepareStatement("SELECT * FROM perdidos ORDER BY id ASC;");
+		
+		
+		PreparedStatement consultaPerdidos= connection.prepareStatement("SELECT * FROM perdidos ORDER BY id ASC;");
 
-		ResultSet resultadoPerdidos = consultaUsuarios.executeQuery();
+		ResultSet resultadoPerdidos = consultaPerdidos.executeQuery();
 
 		ArrayList<Perdidos> listadoPerdidos = new ArrayList<Perdidos>();
 		
@@ -973,6 +977,8 @@ public class UsuariosController {
 		}
 		
 		template.addAttribute("listadoPerdidos", listadoPerdidos);
+		
+		
 		
 		
 		PreparedStatement consulta = 
@@ -994,6 +1000,34 @@ public class UsuariosController {
 		}
 		
 		template.addAttribute("listadoAvisos", listadoAvisos);
+		
+		
+		
+		PreparedStatement consultaUsuario = connection.prepareStatement("SELECT * FROM usuarios;");
+
+		ResultSet resultadoUsuario = consultaUsuario.executeQuery();
+
+		ArrayList<Usuario> listadoUsuario= new ArrayList<Usuario>();
+		
+		while ( resultadoUsuario.next() ) {
+			int id = resultadoUsuario.getInt("id");
+			String img_perfil = resultadoUsuario.getString("img_perfil");
+			String nick = resultadoUsuario.getString("nick");
+			String nombre = resultadoUsuario.getString("nombre");
+			String apellido= resultadoUsuario.getString("apellido");
+			String correo = resultadoUsuario.getString("correo");
+			Boolean administrador = resultadoUsuario.getBoolean("administrador");
+			String contrasenia = resultadoUsuario.getString("contrasenia");
+			String codigo = resultadoUsuario.getString("codigo");
+			
+			Usuario v = new Usuario (id, img_perfil, nick, nombre, apellido, correo,
+					  administrador, contrasenia, codigo);
+
+			listadoUsuario.add(v);	
+		}
+
+		
+		template.addAttribute("listadoUsuario", listadoUsuario);
 		
 		connection.close();
 		
@@ -1071,6 +1105,23 @@ public class UsuariosController {
 		return "redirect:/administrar";
 	}
 	
+	
+	@GetMapping("/eliminar-usuarios/{id}")
+	public String eliminarUsuarios(Model template, @PathVariable int id) throws SQLException {
+	
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
+				env.getProperty("spring.datasource.password"));
+
+		PreparedStatement consulta = connection.prepareStatement("DELETE FROM usuarios WHERE id = ?;");
+
+		consulta.setInt(1, id);
+
+		consulta.executeUpdate();
+
+		connection.close();
+		return "redirect:/administrar";
+	}
 	
 }
 
