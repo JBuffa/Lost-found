@@ -34,22 +34,7 @@ public class UsuariosController {
 	//<---seccion de registro--->
 	
 	@GetMapping("/iniciar_sesion")
-	public String iniciarSesion(HttpSession session, Model template) throws SQLException {
-		
-		Connection connection;
-		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
-				env.getProperty("spring.datasource.password"));
-		
-		Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
-
-		if (logeado == null) {
-            template.addAttribute("estaLogeado", false);
-        } else {
-            template.addAttribute("estaLogeado", true);
-            String nick = logeado.getNick();
-            template.addAttribute("nick", nick);  
-		}
-		
+	public String iniciarSesion() {
 	return "login";
 }
 	
@@ -575,8 +560,17 @@ public class UsuariosController {
 		consulta.setString(7, apellido);
 		consulta.executeUpdate();
 
-
-		return "redirect:/iniciar_sesion";
+		connection.close();
+		boolean sePudo = UsuariosHelper.intentarLoguearse(session, nick, contrasenia, connection);
+		
+		if (sePudo){
+			Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
+			connection.close();
+			return "redirect:/perfil/" + logeado.getNick();
+		} else {
+			connection.close();
+			return "redirect:/iniciar_sesion";	
+		}
 	}
 	
 	
@@ -613,10 +607,9 @@ public class UsuariosController {
 			Usuario logeado = com.example.demo.UsuariosHelper.usuarioLogeado(session, connection);
 			
 			if (logeado == null) {
-	            template.addAttribute("estaLogeado", false);
-	        } else {
-	            template.addAttribute("estaLogeado", true);
-	            template.addAttribute("nick", nick);  
+	              template.addAttribute("estaLogeado", false);
+	          } else {
+	              template.addAttribute("estaLogeado", true);
 			}
 			
 			
@@ -628,17 +621,15 @@ public class UsuariosController {
 			ResultSet resultado = consulta.executeQuery();
 			
 			if ( resultado.next() ) {
-				String img_perfil = resultado.getString("img_perfil");
 				String nick1 = resultado.getString("nick");
 				String nombre = resultado.getString("nombre");
 				String apellido = resultado.getString("apellido");
-				String correo = resultado.getString("correo");
 				String administrador = resultado.getString("administrador");
 				String contrasenia = resultado.getString("contrasenia");
+				String correo = resultado.getString("correo");
 				String codigo = resultado.getString("codigo");
+				String img_perfil = resultado.getString("img_perfil");
 				
-
-				template.addAttribute("img_perfil", img_perfil);
 				template.addAttribute("nick", nick1);
 				template.addAttribute("nombre", nombre);
 				template.addAttribute("apellido", apellido);
@@ -646,6 +637,7 @@ public class UsuariosController {
 				template.addAttribute("contrasenia", contrasenia);
 				template.addAttribute("correo", correo);
 				template.addAttribute("codigo", codigo);
+				template.addAttribute("img_perfil", img_perfil);
 
 			}
 			
@@ -678,17 +670,15 @@ public class UsuariosController {
 			ResultSet resultado = consulta.executeQuery();
 			
 			if ( resultado.next() ) {
-				String img_perfil = resultado.getString("img_perfil");
 				String nick1 = resultado.getString("nick");
 				String nombre = resultado.getString("nombre");
 				String apellido = resultado.getString("apellido");
-				String correo = resultado.getString("correo");
 				String administrador = resultado.getString("administrador");
 				String contrasenia = resultado.getString("contrasenia");
+				String correo = resultado.getString("correo");
 				String codigo = resultado.getString("codigo");
+				String img_perfil = resultado.getString("img_perfil");
 				
-
-				template.addAttribute("img_perfil", img_perfil);
 				template.addAttribute("nick", nick1);
 				template.addAttribute("nombre", nombre);
 				template.addAttribute("apellido", apellido);
@@ -696,6 +686,7 @@ public class UsuariosController {
 				template.addAttribute("contrasenia", contrasenia);
 				template.addAttribute("correo", correo);
 				template.addAttribute("codigo", codigo);
+				template.addAttribute("img_perfil", img_perfil);
 
 			}
 			
@@ -927,8 +918,6 @@ public class UsuariosController {
 		template.addAttribute("listadoMascota", listadoMascota);
 		
 		
-		
-		
 		PreparedStatement consultaRefugio = connection.prepareStatement("SELECT * FROM refugio ORDER BY id ASC;");
 
 		ResultSet resultadoRefugio = consultaRefugio.executeQuery();
@@ -958,11 +947,9 @@ public class UsuariosController {
 		template.addAttribute("listadoRefugio", listadoRefugio);
 		
 		
-		
-		
-		PreparedStatement consultaPerdidos= connection.prepareStatement("SELECT * FROM perdidos ORDER BY id ASC;");
+		PreparedStatement consultaUsuarios = connection.prepareStatement("SELECT * FROM perdidos ORDER BY id ASC;");
 
-		ResultSet resultadoPerdidos = consultaPerdidos.executeQuery();
+		ResultSet resultadoPerdidos = consultaUsuarios.executeQuery();
 
 		ArrayList<Perdidos> listadoPerdidos = new ArrayList<Perdidos>();
 		
@@ -980,8 +967,6 @@ public class UsuariosController {
 		}
 		
 		template.addAttribute("listadoPerdidos", listadoPerdidos);
-		
-		
 		
 		
 		PreparedStatement consulta = 
@@ -1003,34 +988,6 @@ public class UsuariosController {
 		}
 		
 		template.addAttribute("listadoAvisos", listadoAvisos);
-		
-		
-		
-		PreparedStatement consultaUsuario = connection.prepareStatement("SELECT * FROM usuarios;");
-
-		ResultSet resultadoUsuario = consultaUsuario.executeQuery();
-
-		ArrayList<Usuario> listadoUsuario= new ArrayList<Usuario>();
-		
-		while ( resultadoUsuario.next() ) {
-			int id = resultadoUsuario.getInt("id");
-			String img_perfil = resultadoUsuario.getString("img_perfil");
-			String nick = resultadoUsuario.getString("nick");
-			String nombre = resultadoUsuario.getString("nombre");
-			String apellido= resultadoUsuario.getString("apellido");
-			String correo = resultadoUsuario.getString("correo");
-			Boolean administrador = resultadoUsuario.getBoolean("administrador");
-			String contrasenia = resultadoUsuario.getString("contrasenia");
-			String codigo = resultadoUsuario.getString("codigo");
-			
-			Usuario v = new Usuario (id, img_perfil, nick, nombre, apellido, correo,
-					  administrador, contrasenia, codigo);
-
-			listadoUsuario.add(v);	
-		}
-
-		
-		template.addAttribute("listadoUsuario", listadoUsuario);
 		
 		connection.close();
 		
@@ -1108,23 +1065,6 @@ public class UsuariosController {
 		return "redirect:/administrar";
 	}
 	
-	
-	@GetMapping("/eliminar-usuarios/{id}")
-	public String eliminarUsuarios(Model template, @PathVariable int id) throws SQLException {
-	
-		Connection connection;
-		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"), env.getProperty("spring.datasource.username"),
-				env.getProperty("spring.datasource.password"));
-
-		PreparedStatement consulta = connection.prepareStatement("DELETE FROM usuarios WHERE id = ?;");
-
-		consulta.setInt(1, id);
-
-		consulta.executeUpdate();
-
-		connection.close();
-		return "redirect:/administrar";
-	}
 	
 }
 

@@ -2,14 +2,14 @@ package com.example.model;
 
 public class Usuario {
 	private int id;
+	private String img_perfil;
+	private String nick;
 	private String nombre;
 	private String apellido;
-	private String nick;
+	private String correo;
+	private boolean administrador;
 	private String contrasenia;
 	private String codigo;
-	private String correo;
-	private String img_perfil;
-	private boolean administrador;
 	
 	public Usuario(int id, String img_perfil, String nick, String nombre, String apellido, String correo, boolean administrador, String contrasenia,  String codigo) {
 		this.id = id;
@@ -32,6 +32,14 @@ public class Usuario {
 		this.id = id;
 	}
 
+
+	public boolean isAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(boolean administrador) {
+		this.administrador = administrador;
+	}
 	public String getCodigo() {
 		return codigo;
 	}
@@ -48,21 +56,6 @@ public class Usuario {
 		this.contrasenia = contrasenia;
 	}
 
-	public boolean isAdministrador() {
-		return administrador;
-	}
-
-	public void setAdministrador(boolean administrador) {
-		this.administrador = administrador;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
 
 	public String getImg_perfil() {
 		return img_perfil;
@@ -71,6 +64,15 @@ public class Usuario {
 	public void setImg_perfil(String img_perfil) {
 		this.img_perfil = img_perfil;
 	}
+	
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	
 
 	public String getNombre() {
 		return nombre;
@@ -88,12 +90,13 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-	public String getNick() {
-		return nick;
+
+	public String getCorreo() {
+		return correo;
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 	
